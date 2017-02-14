@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="app">
+<html lang="ru" ng-app="app">
 <head>
 	<meta charset="UTF-8">
 	<title>Cart - Test task</title>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-
 	BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<script type="text/javascript" src="main.js"></script>
 
 </head>
 <body>
@@ -25,7 +26,7 @@
 								  </div>
 								  <div class="form-group">
 								    <label for="exampleInputPassword3">Цена</label>
-								    <input type="number" class="form-control" ng-model="form.price" ng-min="0" style="width:100px;">
+								    <input type="number" class="form-control" ng-model="form.price" min="0" style="width:100px;">
 								    <span>р</span>
 								  </div>
 								  <button type="submit" class="btn btn-primary" ng-click="submit()">Добавить</button>
@@ -64,7 +65,7 @@
 							<form class="form-inline" ng-init="form">
 								<div class="form-group">
 									<label for="exampleInputEmail3">Скидка</label>
-									<input type="number" class="form-control" ng-model="form.discount" style="width:100px;">
+									<input type="number" class="form-control" ng-model="form.discount" min="0" style="width:100px;">
 									<span>Руб</span>
 								</div>
 								<button type="submit" class="btn btn-success" ng-click="submit()">Применить</button>
@@ -75,128 +76,5 @@
 			</div>
 		</div>
 	</div>
-
-	<script type="text/javascript">
-		var app = angular.module('app', []);
-
-		app.factory('Cart', function () {
-			
-			var self = this;
-
-			var productList = [
-				{
-					name: 'Ноубук HP ProBook',
-					price: 25400
-				},
-				{
-					name: 'Холодильник BOSH',
-					price: 15700
-				}
-			];
-
-			self.discount = 0;
-
-			self.addProduct = function(item) {
-				if(!item.name || !item.price) {
-					return false;
-				}
-				productList.push(item);
-			};
-
-			self.removeProduct = function(index) {
-				productList.splice(index,1);
-			};
-
-			self.updateProductsDiscount = function() {
-				if(productList.length == 0) {
-					return false;
-				}
-				var discountSumm = 0;
-				var itemId;
-				var prices = productList.map(function(item){
-					return Number(item.price)
-				});
-				var summ = prices.reduce(function(prevVal,curVal) {
-					return prevVal + curVal;
-				});
-				var maxPrice = Math.max.apply(Math,prices);
-
-				angular.forEach(productList, function(item, key) {
-					var itemPercent = 100 / summ * item.price;
-					var itemDiscount = Math.floor(self.discount / 100 * itemPercent);
-
-					item.discountPrice = item.price - itemDiscount;
-					discountSumm+= itemDiscount;
-
-					if(maxPrice==item.price) {
-						itemId = key;
-					}
-				});
-				productList[itemId].discountPrice -= self.discount-discountSumm;
-			};
-
-			self.setDiscount = function(val) {
-				self.discount = val;
-			};
-			self.getDiscount = function() {
-				return self.discount;
-			};
-			self.getProductCount = function(val) {
-				return productList.length;
-			};
-			self.getProductList = function() {
-				return productList;
-			};
-
-			return this;
-		});
-
-		app.controller('CartHeader', function ($scope,Cart) {
-			
-			$scope.submit = function() {
-				if(!$scope.form) {
-					alert('Не все поля заполнены')
-					return false;
-				} else if($scope.form.discount < 0) {
-					alert('Запрещен ввод отрицаиельных значений');
-					return false;
-				}
-				var item = {
-					name:$scope.form.name ? $scope.form.name : false,
-					price:$scope.form.price ? $scope.form.price : false
-				};
-				Cart.addProduct(item);
-				$scope.form =null;
-			};
-		});
-
-		app.controller('CartContent', function ($scope,Cart) {
-			$scope.productArr = Cart.getProductList();
-
-			$scope.$watchCollection(Cart.getProductCount, function() {
-		        Cart.updateProductsDiscount();
-		    });
-
-			$scope.remove = function(index) {
-				Cart.removeProduct(index);
-			};
-		});
-
-		app.controller('CartFooter', function ($scope,Cart) {
-			$scope.submit = function() {
-				if(!$scope.form) {
-					alert('Поле не заполнено');
-					return false;
-				} else if($scope.form.discount < 0) {
-					alert('Запрещен ввод отрицаиельных значений');
-					return false;
-				}
-				var discount = $scope.form.discount;
-
-				Cart.setDiscount(discount);
-				Cart.updateProductsDiscount();
-			};
-		});
-	</script>
 </body>
 </html>

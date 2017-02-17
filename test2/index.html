@@ -50,9 +50,9 @@
 				circle.setRatio(Math.ceil(e.clientY));
 				circle.setItemPosition(circle.item,'right')
 			}
-			// text = 'x ='+Math.floor(ag.x)+', '+'<br>y ='+Math.floor(ag.y)+', '+'<br>z ='+Math.floor(ag.z);
-			// var item  = document.getElementById('gg');
-			// item.innerHTML = text;
+			text = 'x ='+Math.floor(ag.x)+', '+'<br>y ='+Math.floor(ag.y)+', '+'<br>z ='+Math.floor(ag.z);
+			var item  = document.getElementById('gg');
+			item.innerHTML = text;
 		}
 		window.addEventListener('devicemotion', onMotionChange, true);
 		function setLeft(val) {

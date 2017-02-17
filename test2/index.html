@@ -26,9 +26,7 @@
 			},
 			item :  document.getElementById('circle'),
 			setItemPosition: function(item,direction) {
-				if(direction == 'left') {
-					circle.props.position += (2 *circle.props.ratio);
-				} else if(direction == 'right') {
+				if(circle.props.position < circle.props.minPosX && circle.props.position < circle.props.minPosX) {
 					circle.props.position += (2 *circle.props.ratio);
 				}
 				item.style.left = circle.props.position+'px';
@@ -38,15 +36,13 @@
 				console.log(val);
 			}
 		};
-		circle.props.minPosX = wrapWidth/2 - circle.item.offsetWidth/2;
-		circle.props.maxPosX = -(wrapWidth/2 - circle.item.offsetWidth/2);
+		circle.props.maxPosX = wrapWidth/2 - circle.item.offsetWidth/2;
+		circle.props.minPosX = -(wrapWidth/2 - circle.item.offsetWidth/2);
+
+		console.log('min '+circle.props.minPosX,'max '+circle.props.maxPosX );
 
 		function onMotionChange(e) {
 			var ag = e.accelerationIncludingGravity;
-			if(ag.x < 0) {
-				circle.setRatio(Math.ceil(ag.x));
-				circle.setItemPosition(circle.item,'left')
-			} else {
 				circle.setRatio(Math.ceil(ag.x));
 				circle.setItemPosition(circle.item,'right')
 			}

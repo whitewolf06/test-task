@@ -35,7 +35,7 @@
 		function onMotionChange(e) {
 			// покажем значения параметров в реальном времени
 			var ag = e.accelerationIncludingGravity;
-			text = 'x ='+ag.x+', '+'y ='+ag.y+', '+'z ='+ag.z;
+			text = 'x ='+ag.x+', '+'<br>y ='+ag.y+', '+'<br>z ='+ag.z;
 			item.innerHTML = text;
 		}
 		window.addEventListener('devicemotion', onMotionChange, true);

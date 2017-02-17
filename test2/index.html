@@ -22,16 +22,23 @@
 		
 		console.log(item);
 		var gg = 1;
-		var time = setInterval(function() {
-			gg++;
-			item.style.color = "#"+((1<<24)*Math.random()|0).toString(16);
-			console.log(gg);
-			item.innerHTML = gg;
-			if(gg == 15) {
-				clearInterval(time);
-			}
-		}, 500);
-		
+		// var time = setInterval(function() {
+		// 	gg++;
+		// 	item.style.color = "#"+((1<<24)*Math.random()|0).toString(16);
+		// 	console.log(gg);
+		// 	item.innerHTML = gg;
+		// 	if(gg == 15) {
+		// 		clearInterval(time);
+		// 	}
+		// }, 500);
+		var maxAG = 0;
+		function onMotionChange(e) {
+			// покажем значения параметров в реальном времени
+			var ag = e.accelerationIncludingGravity;
+			text = 'x ='+ag.x+', '+'y ='+ag.y+', '+'z ='+ag.z;
+			item.innerHTML = text;
+		}
+		window.addEventListener('devicemotion', onMotionChange, true);
 	</script>
 </body>
 </html>

@@ -11,7 +11,7 @@
 	<style>
 		#test {
 			width: 100%;
-			font-size: 40px;
+			font-size: 30px;
 			text-transform: uppercase;
 			text-align: center;
 			padding-top:40px;
@@ -35,7 +35,7 @@
 		function onMotionChange(e) {
 			// покажем значения параметров в реальном времени
 			var ag = e.accelerationIncludingGravity;
-			text = 'x ='+ag.x+', '+'<br>y ='+ag.y+', '+'<br>z ='+ag.z;
+			text = 'x ='+Math.floor(ag.x)+', '+'<br>y ='+Math.floor(ag.y)+', '+'<br>z ='+Math.floor(ag.z);
 			item.innerHTML = text;
 		}
 		window.addEventListener('devicemotion', onMotionChange, true);

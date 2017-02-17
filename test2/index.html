@@ -6,6 +6,7 @@
 	<link rel="stylesheet" href="main.css">
 </head>
 <body>
+	<div id="gg"></div>	
 	<!--<div class="test">
 		<button onclick="setLeft(-5)">Влево</button>
 		<button onclick="setRight(5)">Вправо</button>
@@ -48,6 +49,9 @@
 				circle.setRatio(Math.ceil(e.clientY));
 				circle.setItemPosition(circle.item,'right')
 			}
+			text = 'x ='+Math.floor(e.x)+', '+'<br>y ='+Math.floor(e.y)+', '+'<br>z ='+Math.floor(e.z);
+			var item  = document.getElementById('gg');
+			item.innerHTML = text;
 		}
 		window.addEventListener('devicemotion', onMotionChange, true);
 		function setLeft(val) {

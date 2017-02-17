@@ -1,0 +1,29 @@
+body {
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    overflow:hidden;
+}
+
+@keyframes fall {
+    0% {top: 0%;}
+    15% {top: 100%;}
+    30% {top: 70%;}
+    45% {top: 100%;} 
+    100% {
+        top: 100%;
+        
+    } 
+}
+#circle {
+    width: 100px;
+    height: 100px;
+    background: red;
+    border-radius: 100%;
+    position: relative;
+    margin: 0 auto;
+    padding: 0;
+    margin-top: -100px;
+    animation: fall 1.5s normal forwards;
+    transition: left 0.2s ease;
+}

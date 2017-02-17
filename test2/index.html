@@ -3,42 +3,61 @@
 <head>
 	<meta charset="UTF-8">
 	<title>test</title>
+	<link rel="stylesheet" href="main.css">
 </head>
 <body>
-	<div id="test">
-		index
-	</div>
-	<style>
-		#test {
-			width: 100%;
-			font-size: 30px;
-			text-transform: uppercase;
-			text-align: center;
-			padding-top:40px;
-		}
-	 </style>
-	<script>
-		var item = document.getElementById('test');
+	<!--<div class="test">
+		<button onclick="setLeft(-5)">Влево</button>
+		<button onclick="setRight(5)">Вправо</button>
+	</div>-->
+	<div id="circle">
 		
-		console.log(item);
-		var gg = 1;
-		// var time = setInterval(function() {
-		// 	gg++;
-		// 	item.style.color = "#"+((1<<24)*Math.random()|0).toString(16);
-		// 	console.log(gg);
-		// 	item.innerHTML = gg;
-		// 	if(gg == 15) {
-		// 		clearInterval(time);
-		// 	}
-		// }, 500);
-		var maxAG = 0;
+	</div>
+	<script>
+		var wrapper = document.getElementsByTagName('body');
+		var wrapHeight = wrapper[0].offsetHeight;
+		var wrapWidth = wrapper[0].offsetWidth;
+
+		var circle = {
+			props: {
+				ratio : 1,
+				position: 0
+			},
+			item :  document.getElementById('circle'),
+			setItemPosition: function(item,direction) {
+				if(direction == 'left') {
+					circle.props.position += (2 *circle.props.ratio);
+				} else if(direction == 'right') {
+					circle.props.position += (2 *circle.props.ratio);
+				}
+				item.style.left = circle.props.position+'px';
+			},
+			setRatio: function(val) {
+				circle.props.ratio = val;
+				console.log(val);
+			}
+		};
+		circle.props.minPosX = wrapWidth/2 - circle.item.offsetWidth/2;
+		circle.props.maxPosX = -(wrapWidth/2 - circle.item.offsetWidth/2);
+
 		function onMotionChange(e) {
-			// покажем значения параметров в реальном времени
-			var ag = e.accelerationIncludingGravity;
-			text = 'x ='+Math.floor(ag.x)+', '+'<br>y ='+Math.floor(ag.y)+', '+'<br>z ='+Math.floor(ag.z);
-			item.innerHTML = text;
+			if(e.clientY < 0) {
+				circle.setRatio(Math.ceil(e.clientY));
+				circle.setItemPosition(circle.item,'left')
+			} else {
+				circle.setRatio(Math.ceil(e.clientY));
+				circle.setItemPosition(circle.item,'right')
+			}
 		}
 		window.addEventListener('devicemotion', onMotionChange, true);
+		function setLeft(val) {
+			var e = {clientY : val}
+			onMotionChange(e);
+		}
+		function setRight(val) {
+			var e = {clientY : val}
+			onMotionChange(e);
+		}
 	</script>
 </body>
 </html>

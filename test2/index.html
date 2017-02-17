@@ -4,60 +4,48 @@
 	<meta charset="UTF-8">
 	<title>test</title>
 	<link rel="stylesheet" href="main.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-	<div id="gg"></div>	
-	<!--<div class="test">
-		<button onclick="setLeft(-5)">Влево</button>
-		<button onclick="setRight(5)">Вправо</button>
-	</div>-->
-	<div id="circle">
-		
-	</div>
+	<div id="circle"></div>
 	<script>
 		var wrapper = document.getElementsByTagName('body');
 		var wrapHeight = wrapper[0].offsetHeight;
 		var wrapWidth = wrapper[0].offsetWidth;
 
 		var circle = {
+			item :  document.getElementById('circle'),
 			props: {
 				ratio : 1,
 				position: 0
 			},
-			item :  document.getElementById('circle'),
-			setItemPosition: function(item,direction) {
-				if(circle.props.position < circle.props.minPosX && circle.props.position < circle.props.minPosX) {
-					circle.props.position += (2 *circle.props.ratio);
+			setItemPosition: function(item) {
+
+				circle.props.position += (2 *circle.props.ratio);
+				if(circle.props.position < circle.props.minPosX) {
+					circle.props.position = circle.props.minPosX;
+				} else if(circle.props.position > circle.props.maxPosX) {
+					circle.props.position = circle.props.maxPosX;
 				}
+
 				item.style.left = circle.props.position+'px';
 			},
 			setRatio: function(val) {
 				circle.props.ratio = val;
-				console.log(val);
 			}
 		};
 		circle.props.maxPosX = wrapWidth/2 - circle.item.offsetWidth/2;
 		circle.props.minPosX = -(wrapWidth/2 - circle.item.offsetWidth/2);
 
-		console.log('min '+circle.props.minPosX,'max '+circle.props.maxPosX );
-
 		function onMotionChange(e) {
 			var ag = e.accelerationIncludingGravity;
-				circle.setRatio(Math.ceil(ag.x));
-				circle.setItemPosition(circle.item,'right')
-			// text = 'x ='+Math.floor(ag.x)+', '+'<br>y ='+Math.floor(ag.y)+', '+'<br>z ='+Math.floor(ag.z);
-			// var item  = document.getElementById('gg');
-			// item.innerHTML = text;
+			circle.setRatio(Math.ceil(ag.x));
+			circle.setItemPosition(circle.item)	
 		}
-		window.addEventListener('devicemotion', onMotionChange, true);
-		function setLeft(val) {
-			var e = {x : val}
-			onMotionChange(e);
-		}
-		function setRight(val) {
-			var e = {x : val}
-			onMotionChange(e);
-		}
+		setTimeout(function(e) {
+			circle.item.classList.add('active');
+			window.addEventListener('devicemotion', onMotionChange, true);
+		},2000);
 	</script>
 </body>
 </html>

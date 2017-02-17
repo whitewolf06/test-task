@@ -44,23 +44,23 @@
 		function onMotionChange(e) {
 			var ag = e.accelerationIncludingGravity;
 			if(ag.x < 0) {
-				circle.setRatio(Math.ceil(e.clientY));
+				circle.setRatio(Math.ceil(e.x));
 				circle.setItemPosition(circle.item,'left')
 			} else {
-				circle.setRatio(Math.ceil(e.clientY));
+				circle.setRatio(Math.ceil(e.x));
 				circle.setItemPosition(circle.item,'right')
 			}
-			text = 'x ='+Math.floor(ag.x)+', '+'<br>y ='+Math.floor(ag.y)+', '+'<br>z ='+Math.floor(ag.z);
-			var item  = document.getElementById('gg');
-			item.innerHTML = text;
+			// text = 'x ='+Math.floor(ag.x)+', '+'<br>y ='+Math.floor(ag.y)+', '+'<br>z ='+Math.floor(ag.z);
+			// var item  = document.getElementById('gg');
+			// item.innerHTML = text;
 		}
 		window.addEventListener('devicemotion', onMotionChange, true);
 		function setLeft(val) {
-			var e = {clientY : val}
+			var e = {x : val}
 			onMotionChange(e);
 		}
 		function setRight(val) {
-			var e = {clientY : val}
+			var e = {x : val}
 			onMotionChange(e);
 		}
 	</script>

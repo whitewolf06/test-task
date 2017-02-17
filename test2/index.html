@@ -26,6 +26,7 @@
 			gg++;
 			item.style.color = "#"+((1<<24)*Math.random()|0).toString(16);
 			console.log(gg);
+			item.innerHTML = gg;
 			if(gg == 15) {
 				clearInterval(time);
 			}

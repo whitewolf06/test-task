@@ -5,6 +5,23 @@
 	<title>test</title>
 </head>
 <body>
-	index
+	<div id="test">
+		index
+	</div>
+	<script>
+		var item = document.getElementById('test');
+		
+		console.log(item);
+		var gg = 1;
+		var time = setInterval(function() {
+			gg++;
+			item.style.color = "#"+((1<<24)*Math.random()|0).toString(16);
+			console.log(gg);
+			if(gg == 15) {
+				clearInterval(time);
+			}
+		}, 500);
+		
+	</script>
 </body>
 </html>

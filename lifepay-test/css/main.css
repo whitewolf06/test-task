@@ -1,0 +1,12 @@
+.hidden {
+	overflow: hidden;
+}
+.ui--container {
+  margin: 0 auto;
+  font-family: arial;
+  width: 900px; }
+
+.obj-workspace__wrapper {
+  background: #ccc; }
+
+/*# sourceMappingURL=main.css.map */

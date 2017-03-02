@@ -143,14 +143,15 @@ $(function() {
 				self.fn.setCanvasSize();
 				self.fn.setScrollMax();
 			}),
-			scrollWindow : $('html, body').stop(true,true).bind('DOMMouseScroll mousewheel MozMousePixelScroll', function (e) {
-
+			scrollWindow : $('html, body').bind('DOMMouseScroll mousewheel MozMousePixelScroll', function (e) {
+				console.log(e.originalEvent.wheelDelta);
 				self.fn.setDelta(e.originalEvent.wheelDelta);
 				self.fn.checkAnimateMode();
 				self.fn.checkWindowScroll();
-				console.log(params.ScrollMode)
+
 				switch (params.ScrollMode) {
 					case 'lock' :
+						e.originalEvent.wheelDelta = 0;
 						return false;
 						break;
 					case 'top':
@@ -187,8 +188,8 @@ $(function() {
 		this.ev.baseLoad();
 		this.ev.resizeWindow; //callback event
 		this.ev.scrollWindow; //callback event
-		this.ev.clickPagination; //callback event
-
+		var gg = this.ev.clickPagination; //callback event
+		gg = 0;
 	}; 
 	var workspace = new WidgetWorkSpace();
 

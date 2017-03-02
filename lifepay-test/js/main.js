@@ -143,16 +143,15 @@ $(function() {
 				self.fn.setCanvasSize();
 				self.fn.setScrollMax();
 			}),
-			scrollWindow : $('html, body').bind('DOMMouseScroll mousewheel MozMousePixelScroll', function (e) {
+			scrollWindow : $('html, body').stop(true,true).bind('DOMMouseScroll mousewheel MozMousePixelScroll', function (e) {
 
 				self.fn.setDelta(e.originalEvent.wheelDelta);
 				self.fn.checkAnimateMode();
 				self.fn.checkWindowScroll();
-				console.log(params.ScrollMode);
+				console.log(params.ScrollMode)
 				switch (params.ScrollMode) {
 					case 'lock' :
-						e.preventDefault();
-						e.stopPropagation();
+						return false;
 						break;
 					case 'top':
 						break;
@@ -161,13 +160,11 @@ $(function() {
 						self.fn.actionViewAnimate();
 						self.fn.actionViewPagination();
 						self.fn.actionViewChangeSlide();
-						e.preventDefault();
-						e.stopPropagation();
+						return false;
 						break;
 					case 'block':
 						self.fn.actionScrollAnimate();
-						e.preventDefault();
-						e.stopPropagation();
+						return false;
 
 						break;
 				

@@ -151,7 +151,7 @@ $(function() {
 
 				switch (params.ScrollMode) {
 					case 'lock' :
-						e.originalEvent.wheelDelta = 0;
+						e.stopImmediatePropagation();
 						return false;
 						break;
 					case 'top':

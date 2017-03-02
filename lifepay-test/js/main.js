@@ -148,10 +148,11 @@ $(function() {
 				self.fn.setDelta(e.originalEvent.wheelDelta);
 				self.fn.checkAnimateMode();
 				self.fn.checkWindowScroll();
-
+				console.log(params.ScrollMode);
 				switch (params.ScrollMode) {
 					case 'lock' :
-						return false;
+						e.preventDefault();
+						e.stopPropagation();
 						break;
 					case 'top':
 						break;
@@ -160,11 +161,13 @@ $(function() {
 						self.fn.actionViewAnimate();
 						self.fn.actionViewPagination();
 						self.fn.actionViewChangeSlide();
-						return false;
+						e.preventDefault();
+						e.stopPropagation();
 						break;
 					case 'block':
 						self.fn.actionScrollAnimate();
-						return false;
+						e.preventDefault();
+						e.stopPropagation();
 
 						break;
 				

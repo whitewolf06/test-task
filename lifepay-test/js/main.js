@@ -11,9 +11,10 @@ $(function() {
 			scroll: '',
 			scrolling: true,
 			scrollMax : '',
+			lockBtn :  '-lock',
 			animate : {
 				stepCur : 0,
-				stepMax : 6,
+				stepMax : 5,
 				on: false,
 				end: false,
 				time: 500
@@ -27,6 +28,8 @@ $(function() {
 			sliderWrap : $('.obj-workspace__slider-wrapper'),
 			sliderRoll : $('.obj-workspace__slider-roll'),
 			sliderItem : $('.obj-workspace__slider-item'),
+			sliderBtnPrev : $('.obj-workspace__slider-control-btn.-left'),
+			sliderBtnNext : $('.obj-workspace__slider-control-btn.-right')
 		}
 
 		// Methods
@@ -54,7 +57,7 @@ $(function() {
 					params.ScrollMode = 'block';
 				}
 			},
-
+			
 			setCanvasSize: function() {
 				$(self.item.wrap).css({height: params.windowHeight});
 			},
@@ -74,9 +77,13 @@ $(function() {
 				var newStep = params.scrollDelta;
 				params.animate.on = true;
 
-				if(index) {
+				if(index == 'prev') {
+					params.animate.stepCur--;
+				} else if(index == 'next') {
+					params.animate.stepCur++;
+				} else if(index) {
 					params.animate.stepCur = index;
-				} else {
+				}  else {
 					params.animate.stepCur += -(newStep);
 				}
 				
@@ -84,7 +91,7 @@ $(function() {
 					params.animate.stepCur = 0;
 					params.animate.on = false;
 				}
-				if(params.animate.stepCur >= params.animate.stepMax) {
+				if(params.animate.stepCur > params.animate.stepMax) {
 					params.animate.stepCur = params.animate.stepMax;
 					params.animate.on = false;
 					params.animate.end = true;
@@ -98,6 +105,16 @@ $(function() {
 
 
 			},
+			actionViewCheckControls: function() {
+				$(self.item.sliderBtnPrev).removeClass('-lock');
+				$(self.item.sliderBtnNext).removeClass('-lock');
+				if(params.animate.stepCur == 0) {
+					$(self.item.sliderBtnPrev).addClass('-lock');
+				} 
+				if(params.animate.stepCur >= params.animate.stepMax) {
+					$(self.item.sliderBtnNext).addClass('-lock');
+				}
+			},
 			actionViewSetSlideParams: function() {
 				var width = $(self.item.sliderWrap).width();
 				var steps = params.animate.stepMax;
@@ -108,7 +125,7 @@ $(function() {
 				var width = $(self.item.sliderWrap).width();
 				var curStep = params.animate.stepCur;
 				$(self.item.sliderRoll).css({'left': -(width*curStep)+'px',});
-				console.log(curStep);
+		
 			},
 			actionViewAnimate: function() {
 			},
@@ -136,115 +153,94 @@ $(function() {
 				self.fn.checkWindowScroll();
 				self.fn.setScrollMax();
 				self.fn.actionViewSetSlideParams();
-				console.log(params);
-			},
-			resizeWindow : $(window).resize(function () {
-				self.fn.checkWindowSize();
-				self.fn.setCanvasSize();
-				self.fn.setScrollMax();
-			}),
-			scrollWindow : $('html, body').bind('DOMMouseScroll mousewheel MozMousePixelScroll', function (e) {
-				console.log(e.originalEvent.wheelDelta);
-				self.fn.setDelta(e.originalEvent.wheelDelta);
-				self.fn.checkAnimateMode();
-				self.fn.checkWindowScroll();
-
-				switch (params.ScrollMode) {
-					case 'lock' :
-						e.stopImmediatePropagation();
-						return false;
-						break;
-					case 'top':
-						break;
-					case 'animation':
-						self.fn.changeStep();
-						self.fn.actionViewAnimate();
-						self.fn.actionViewPagination();
-						self.fn.actionViewChangeSlide();
-						return false;
-						break;
-					case 'block':
-						self.fn.actionScrollAnimate();
-						return false;
-
-						break;
-				
-					default:
-
-						break;
-				}
-
-			}),
-			clickPagination : $(self.item.paginationBtn).click(function(event) {
-				self.fn.changeStep($(this).index());
-				self.fn.actionViewAnimate();
 				self.fn.actionViewPagination();
-				self.fn.actionViewChangeSlide();
-			})
+				self.fn.actionViewCheckControls();
+		
+			},
+			resizeWindow : function() {
+				$(window).resize(function () {
+					self.fn.checkWindowSize();
+					self.fn.setCanvasSize();
+					self.fn.setScrollMax();
+				});
+			},
+			scrollWindow : function() {
+				$('html, body').bind('DOMMouseScroll mousewheel MozMousePixelScroll', function (e) {
+					self.fn.setDelta(e.originalEvent.wheelDelta);
+					self.fn.checkAnimateMode();
+					self.fn.checkWindowScroll();
+
+
+					switch (params.ScrollMode) {
+						case 'lock' :
+							e.originalEvent.wheelDelta = 0;
+							return false;
+							break;
+						case 'top':
+							break;
+						case 'animation':
+							self.fn.changeStep();
+							self.fn.actionViewAnimate();
+							self.fn.actionViewPagination();
+							self.fn.actionViewCheckControls();
+							self.fn.actionViewChangeSlide();
+							self.fn.actionViewPagination();
+
+							return false;
+							break;
+						case 'block':
+							self.fn.actionScrollAnimate();
+							return false;
+
+							break;
+					
+						default:
+
+							break;
+					}
+
+				});
+			},
+			clickPagination : function() {
+				$(self.item.paginationBtn).click(function(event) {
+					self.fn.changeStep($(this).index());
+					self.fn.actionViewAnimate();
+					self.fn.actionViewPagination();
+					self.fn.actionViewChangeSlide();
+					self.fn.actionViewCheckControls();
+				});
+			},
+			clickPrev : function() {
+				$(self.item.sliderBtnPrev).click(function() {
+					if($(this).hasClass(params.lockBtn)) {return false}
+					self.fn.changeStep('prev');
+					self.fn.actionViewPagination();
+					self.fn.actionViewChangeSlide();
+					self.fn.actionViewCheckControls();
+
+				});
+			},
+			clickNext : function() {
+				$(self.item.sliderBtnNext).click(function() {
+					if($(this).hasClass(params.lockBtn)) {return false}
+					self.fn.changeStep('next');
+					self.fn.actionViewPagination();
+					self.fn.actionViewChangeSlide();
+					self.fn.actionViewCheckControls();
+
+				});
+			}
 		}
 
-		// start events
+		// registr events
 
 		this.ev.baseLoad();
-		this.ev.resizeWindow; //callback event
-		this.ev.scrollWindow; //callback event
-		var gg = this.ev.clickPagination; //callback event
-		gg = 0;
+		this.ev.resizeWindow; 
+		this.ev.clickPagination();
+		this.ev.clickPrev();
+		this.ev.clickNext();
+		this.ev.scrollWindow();
 	}; 
 	var workspace = new WidgetWorkSpace();
 
-	// $('[data-widget="workspace-animation"]').css({
-	// 	height: '50px',
-	// });
 });
-
-// $('html, body').off('scroll mousewheel touchmove', function(e) {
-// 	console.log(e);
-//     e.preventDefault();
-//     e.stopPropagation();
-//     return false;
-// });
-
-
-
-// if($(self.item.wrap).hasClass('active')) {
-// 	params.scrollLock = true;	
-// } else {
-// 	params.scrollLock = false;
-// }
-// if(params.scrollLock) {
-// 	return false;
-// }
-// if(!params.scrolling && delta < 0 && params.animate.stepCur == 0) {
-// 	return false;
-// }
-// if(params.scroll+params.windowHeight >= params.scrollMax-(params.windowHeight/2) && delta < 0) {
-// 	e.preventDefault();
-// 	e.stopPropagation();
-// 	params.animate.on = true;
-// 	$('body,html').stop(true,true).animate({scrollTop:params.scrollMax-params.windowHeight},500);
-// } else {
-// 	params.animate.on = false;
-// }
-// if((params.scroll+params.windowHeight+(-delta)) >= params.scrollMax && delta < 0) {
-// 	e.preventDefault();
-//     			e.stopPropagation();
-// }
-				// if (e.type == 'mousewheel') {
-//       console.log();
-// }
-// console.log('scroll '+(params.scroll+params.windowHeight),'max '+params.scrollMax);
-// if(delta < 0 && !params.scrolling) {
-// 	if(params.animate.stepCur <= params.animate.stepMax) {
-// 		params.animate.stepCur++;
-// 	}
-// } else {
-// 	if(params.animate.stepCur > 0) {
-// 		params.scrolling = false;
-// 		setTimeout(function() {
-// 			params.scrolling = true;
-// 		},500)
-// 		params.animate.stepCur--;
-// 		return false
-// 	}
-// }

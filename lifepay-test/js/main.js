@@ -22,7 +22,8 @@ $(function() {
 		}
 
 		this.item =  {
-			wrap : $('[data-widget="workspace-animation"]'),
+			wrap : $('.obj-workspace__wrapper'),
+			canvas : $('.obj-workspace__canvas'),
 			pagination : $('.obj-workspace__pagination-link'),
 			paginationBtn : $('.obj-workspace__pagination-link'),
 			sliderWrap : $('.obj-workspace__slider-wrapper'),
@@ -81,7 +82,7 @@ $(function() {
 					params.animate.stepCur--;
 				} else if(index == 'next') {
 					params.animate.stepCur++;
-				} else if(index) {
+				} else if(index >= 0) {
 					params.animate.stepCur = index;
 				}  else {
 					params.animate.stepCur += -(newStep);
@@ -124,10 +125,11 @@ $(function() {
 			actionViewChangeSlide: function() {
 				var width = $(self.item.sliderWrap).width();
 				var curStep = params.animate.stepCur;
-				$(self.item.sliderRoll).css({'left': -(width*curStep)+'px',});
+				$(self.item.sliderRoll).css({'transform': 'translate(-'+width*curStep+'px, 0px)'});
 		
 			},
 			actionViewAnimate: function() {
+				$(self.item.canvas).attr('data-slide',params.animate.stepCur);
 			},
 			actionViewPagination: function() {
 				var $btn = $(self.item.paginationBtn);
@@ -135,13 +137,22 @@ $(function() {
 				$btn.removeClass('active');
 				$($btn[index]).addClass('active');
 			},
+			actionViewReverce: function() {
+				$(self.item.wrap).addClass('reverce');
+				setTimeout(function() {
+					$(self.item.wrap).removeClass('reverce');
+				}, params.animate.time);
+			},
 			actionScrollAnimate: function() {
 				params.scrolling = false;
 				$('body,html').stop(true,true).animate({scrollTop:params.scrollMax},300, function() {
 					params.scrolling = true;
 					params.animate.on = true;
 				});
-			} 
+			},
+			actionShowAnimation: function () {
+				$(self.item.canvas).addClass('animate');
+			}
 		}
 
 		// events
@@ -152,9 +163,15 @@ $(function() {
 				self.fn.setCanvasSize();
 				self.fn.checkWindowScroll();
 				self.fn.setScrollMax();
+				self.fn.checkAnimateMode();
 				self.fn.actionViewSetSlideParams();
 				self.fn.actionViewPagination();
 				self.fn.actionViewCheckControls();
+				self.fn.actionViewAnimate();
+				if(params.ScrollMode == 'block') {
+					self.fn.actionShowAnimation();
+					$('html, body').off();
+				}
 		
 			},
 			resizeWindow : function() {
@@ -164,39 +181,50 @@ $(function() {
 					self.fn.setScrollMax();
 				});
 			},
-			scrollWindow : function() {
+			scrollWindow : function(type) {
 				$('html, body').bind('DOMMouseScroll mousewheel MozMousePixelScroll', function (e) {
-					self.fn.setDelta(e.originalEvent.wheelDelta);
-					self.fn.checkAnimateMode();
-					self.fn.checkWindowScroll();
+					if(type == 'baseLoad') {
+						self.fn.setDelta(e.originalEvent.wheelDelta);
+						self.fn.checkWindowScroll();
+						self.fn.checkAnimateMode();
+
+						if(params.ScrollMode == 'block') {
+							self.fn.actionShowAnimation();
+							$('html, body').off();
+						}
+					} else {
+						self.fn.setDelta(e.originalEvent.wheelDelta);
+						self.fn.checkAnimateMode();
+						self.fn.checkWindowScroll();
 
 
-					switch (params.ScrollMode) {
-						case 'lock' :
-							e.originalEvent.wheelDelta = 0;
-							return false;
-							break;
-						case 'top':
-							break;
-						case 'animation':
-							self.fn.changeStep();
-							self.fn.actionViewAnimate();
-							self.fn.actionViewPagination();
-							self.fn.actionViewCheckControls();
-							self.fn.actionViewChangeSlide();
-							self.fn.actionViewPagination();
+						switch (params.ScrollMode) {
+							case 'lock' :
+								e.originalEvent.wheelDelta = 0;
+								return false;
+								break;
+							case 'top':
+								break;
+							case 'animation':
+								self.fn.changeStep();
+								self.fn.actionViewAnimate();
+								self.fn.actionViewPagination();
+								self.fn.actionViewCheckControls();
+								self.fn.actionViewChangeSlide();
+								self.fn.actionViewPagination();
 
-							return false;
-							break;
-						case 'block':
-							self.fn.actionScrollAnimate();
-							return false;
+								return false;
+								break;
+							case 'block':
+								self.fn.actionScrollAnimate();
+								return false;
 
-							break;
-					
-						default:
+								break;
+						
+							default:
 
-							break;
+								break;
+						}
 					}
 
 				});
@@ -204,10 +232,11 @@ $(function() {
 			clickPagination : function() {
 				$(self.item.paginationBtn).click(function(event) {
 					self.fn.changeStep($(this).index());
-					self.fn.actionViewAnimate();
 					self.fn.actionViewPagination();
 					self.fn.actionViewChangeSlide();
 					self.fn.actionViewCheckControls();
+					self.fn.actionViewAnimate();
+
 				});
 			},
 			clickPrev : function() {
@@ -217,6 +246,7 @@ $(function() {
 					self.fn.actionViewPagination();
 					self.fn.actionViewChangeSlide();
 					self.fn.actionViewCheckControls();
+					self.fn.actionViewAnimate();
 
 				});
 			},
@@ -227,6 +257,7 @@ $(function() {
 					self.fn.actionViewPagination();
 					self.fn.actionViewChangeSlide();
 					self.fn.actionViewCheckControls();
+					self.fn.actionViewAnimate();
 
 				});
 			}
@@ -235,12 +266,28 @@ $(function() {
 		// registr events
 
 		this.ev.baseLoad();
-		this.ev.resizeWindow; 
+		this.ev.resizeWindow(); 
 		this.ev.clickPagination();
 		this.ev.clickPrev();
 		this.ev.clickNext();
-		this.ev.scrollWindow();
+		this.ev.scrollWindow('baseLoad');
 	}; 
+
 	var workspace = new WidgetWorkSpace();
 
+	// var animateItems = {
+	// 	'pinpad' : $('.obj-workspace__item-pinpad'),
+	// 	'card' : $('.obj-workspace__item-card'),
+	// 	'printer' : $('.obj-workspace__item-printer'),
+	// 	'print-paper' : $('.obj-workspace__item-print-paper'),
+	// };
+
+	// var arrSlides = {
+	// 	3 : function() {
+	// 		animateItems.pinpad.addClass('active');
+	// 		animateItems.card.addClass('active');
+	// 	},
+	// 	4 : function() {
+	// 	}
+	// };
 });

@@ -1,3 +1,8 @@
+body {
+	background: #fff;
+	padding: 0;
+	margin: 0;
+}
 .ui--container {
 	margin: 0 auto;
 	font-family: arial;
@@ -5,7 +10,7 @@
 }
 .obj-workspace {
 
-	* {
+	&__wrapper * {
 		box-sizing:border-box;
 		margin: 0;
 		padding: 0;
@@ -13,40 +18,81 @@
 	}
 
 	&__wrapper {
-		background: #ccc;
+		margin: 0;
+		padding: 0;
+		background: #fff;
+		min-height: 640px;
+		max-height: 680px;
+		overflow: hidden;
 	}
 	&__inner {
 		position: relative;
-		z-index: 100;
 		height: 100%;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		z-index: 100;
 	}
 	&__canvas {
 		position: relative;
 		height: 100%;
+		flex-grow:1;
+		height: 100%;
 	}
-	&__pagination {
+	&__canvas-header {
+	    text-align: center;
+	    display: block;
+	    position: absolute;
+	    bottom: 10%;
+	    left: 0;
+	    width: 100%;
+	    margin: 0 0 450px 0;
+	    font-family: arial;
+	}
+	&__canvas-title {
+		font-size: 28px;
+		color: #555;
+		margin: 10px 0 10px;
+		font-weight: normal;
+	}
+	&__slide-title-wrapper {
+		position: relative;
+	}
+	&__slide-title {
+		font-size: 22px;
+		color: #555;
+		margin: 20px 0;
 		position: absolute;
 		left: 0;
-		bottom: 10%;
+		top: 0;
+		width: 100%;
+		opacity: 0;
+	}
+	&__pagination {
 		text-align: center;
 		width: 100%;
 		z-index: 200;
-
+		padding: 40px 0 50px;
+		background: #fff;
 	}
 	&__pagination-link {
 		display: inline-block;
-		vertical-align: top;
-		width: 16px;
-		height: 16px;
-		border-radius: 100%;
-		background-color: #fff;
-		border: 1px solid #000;
-		font-size: 0;
-		overflow: hidden;
-		transition:all 0.5s ease;
+	    vertical-align: top;
+	    width: 12px;
+	    height: 12px;
+	    border-radius: 100%;
+	    background-color: #fff;
+	    border: 1px solid #8c8c8c;
+	    font-size: 0;
+	    overflow: hidden;
+	    margin: 0 3px;
+	    transition: background,box-shadow 0.5s ease;
+	    background-color: #fff;
 
 		&.active {
-			background-color: darkgreen;
+			background-color: #222;
+			box-shadow: 0 0 0 5px #222;
+			border-color:#222;
 		}
 
 	}
@@ -62,7 +108,7 @@
 		flex-wrap:nowrap;
 		position: relative;
 		left: 0;
-		transition:left 0.5s ease;
+		transition:transform 0.3s ease;
 	}
 	&__slider-item {}
 	&__slider-control {
@@ -80,7 +126,7 @@
 		margin-top: -50px;
 		background: center no-repeat;
 		&.-left {
-			left: -100px;
+			left: -250px;
 			text-align: left;
 			background-image: url(../img/images/icon-left-h.svg);
 
@@ -89,7 +135,7 @@
 			}
 		}
 		&.-right {
-			right: -100px;
+			right: -250px;
 			text-align: right;
 			background-image: url(../img/images/icon-right-h.svg);
 			&.-lock {
@@ -106,65 +152,425 @@
 	    display: block;
 	    position: absolute;
 	    left: 50%;
-	    top: 50%;
+	    bottom: 15px;
 	    margin: -160px 0 0 -250px;
 	    background: url(../img/images-animation/tablet.png) 0 0 no-repeat;
-	    transition: all 0.5s ease;
 	    background-size: contain;
 	    padding: 20px 42px 0 45px;
 	    z-index: 100;
 	    box-sizing: border-box;
-	}
-	&__item-tablet-inner {
-		position: relative;
-	    width: 100%;
-	    height: 100%;
+
+	    &-inner {
+			position: relative;
+		    width: 100%;
+		    height: 100%;	    	
+	    }
+	    &-shadow {
+		    width: 814px;
+		    height: 63px;
+		    display: block;
+		    position: absolute;
+		    left: 50%;
+		    bottom: 20px;
+		    margin: 0 0 -16px -408px;
+		    background: url(../img/images-animation/tablet-shadows.png) center no-repeat;
+		    background-size: contain;
+		    padding: 20px 42px 0 45px;
+		    z-index: 50;  	
+	    }
 	}
 	&__item-card {
-		width: 100px;
-		height: 100px;
-		display: block;
+		width: 222px;
+		height: 145px;
 		position: absolute;
-		right: 10%;
-		top: 30%;
+		left: 50%;
+		bottom: 15px;
 		background-color: red;
-		transition:all 0.5s ease;
+		background: url(../img/images-animation/pinpad-card.png) 0 0 no-repeat;
+		background-size: contain;
 		z-index: 400;
+		margin: 0px 0 100px 500px;
+		opacity: 0;
+		z-index: 99;
 	}
 	&__item-pinpad {
-		width: 100px;
-		height: 100px;
-		display: block;
-		position: absolute;
-		right: 20%;
-		top: 30%;
-		background-color: green;
-		transition:all 0.5s ease;
-		z-index: 400;
+	    width: 144px;
+	    height: 258px;
+	    position: absolute;
+	    left: 50%;
+	    bottom: 15px;
+	    background: url(../img/images-animation/pinpad.png) 0 0 no-repeat;
+	    background-size: contain;
+	    z-index: 90;
+	    margin: 0 0 70px 200px;
 
+	    &-shadow {
+			width: 446px;
+			height: 40px;
+			position: absolute;
+			left: 50%;
+			bottom: 20px;
+			margin: 0 0 87px 43px;
+			background: url(../img/images-animation/pinpad-shadows.png) center no-repeat;
+			background-size: contain;
+			z-index: 49;
+			box-sizing: border-box;	
+	    }
 	}
 	&__item-print-paper {
-		width: 100px;
-		height: 100px;
+		width: 123px;
+		height: 111px;
 		display: block;
 		position: absolute;
-		left: 20%;
-		top: 30%;
-		background-color: black;
-		transition:all 0.5s ease;
-		z-index: 400;
-
+		left: 50%;
+		bottom: 15px;
+		background: url(../img/images-animation/printer-order.png) 0 0 no-repeat;
+		background-size: contain;
+		z-index: 87;
+		margin:  90;
+	    margin: 0 0 70px -350px;
 	}
 	&__item-printer {
-		width: 100px;
-		height: 100px;
+		width: 266px;
+		height: 169px;
 		display: block;
 		position: absolute;
-		left: 20%;
-		top: 50%;
-		background-color: blue;
-		transition:all 0.5s ease;
-		z-index: 400;
+		left: 50%;
+		bottom: 15px;
+		background: url(../img/images-animation/printer-bottom.png) 0 0 no-repeat;
+		background-size: contain;
+		z-index: 90;
+		margin: 0 0 70px -400px;
+
+		&-shadow {
+			width: 619px;
+		    height: 85px;
+		    position: absolute;
+		    left: 50%;
+		    bottom: 20px;
+		    margin: 0 0 70px -600px;
+		    background: url(../img/images-animation/printer-shadows.png) center no-repeat;
+		    background-size: contain;
+		    z-index: 49;	
+	    }
+		// filter: blur(10px) brightness(0.5);
 	}
 
+}
+
+// animation
+
+.obj-workspace__canvas {
+
+	// baseLoad Page
+
+	.obj-workspace__item-printer,
+	.obj-workspace__item-print-paper,
+	.obj-workspace__item-pinpad,
+	.obj-workspace__item-tablet,
+	.obj-workspace__item-card {
+		margin-bottom: 600px;
+		transition: all 1s ease;
+		opacity: 0;
+		
+	}
+	.obj-workspace__item-printer {
+		transition-delay:400ms;
+		transition-duration:400ms;
+		transition-timing-function: cubic-bezier(0, 0.65, 0, 0.93);
+		margin-left: -400px;
+		animation: printerReverce 0.5s forwards;
+		&-shadow {
+			transition:all 500ms ease;
+			transform:scale(0);
+			opacity: 0;
+			animation: printerShadowReverce 0.5s forwards;
+		}
+
+	}
+	.obj-workspace__item-pinpad {
+		transition-delay:200ms;
+		transition-duration:400ms;
+		transition-timing-function: cubic-bezier(0, 0.65, 0, 0.93);
+		margin-left: 200px;
+		animation: pinpadReverce 0.5s forwards;
+		&-shadow {
+			transition:all 500ms ease;
+			transform:scale(0);
+			opacity: 0;
+			animation: pinpadShadowReverce 0.3s forwards;
+		}
+	}
+	.obj-workspace__item-tablet  {
+		transition-delay:0;
+		transition-duration:900ms;
+		transition-timing-function: cubic-bezier(0, 0.65, 0, 0.93);
+
+		&-shadow {
+			transition:all 500ms ease;
+			transform:scale(0);
+			opacity: 0;
+		}
+	}
+	.obj-workspace__item-print-paper {
+		margin-left: -350px;
+		transition-duration:400ms;
+		transition-timing-function: cubic-bezier(0.15, 1.04, 0.18, 1.14);
+		opacity: 0;
+		z-index: 101;
+	}
+	.obj-workspace__item-card {
+		transition-timing-function: ease;
+		opacity: 0;
+		transition-duration:300ms;
+		transition-timing-function: cubic-bezier(0.15, 1.04, 0.18, 1.14);
+	}
+	.obj-workspace__canvas-header {
+		transition:all;
+		transition-delay:700ms;
+		transition-duration:400ms;
+		transition-timing-function: cubic-bezier(0, 0.65, 0, 0.93);
+		margin-bottom: 300px;
+		opacity: 0;
+	}
+
+	// after Scroll
+
+	&.animate {
+		.obj-workspace__item-tablet {
+			margin-bottom: 0;
+			opacity: 1;
+			
+			&-shadow {
+				transform:scale(1);
+				opacity: 1;
+				transition-delay:100ms;
+			}
+		}
+		.obj-workspace__item-printer {
+			margin-bottom: 100px;
+			filter: blur(5px) brightness(0.7);
+			opacity: 1;
+
+			&-shadow {
+				transform:scale(1);
+				opacity: 1;
+				transition-delay:400ms;
+				filter: blur(5px) brightness(0.7);
+			}
+		}
+		.obj-workspace__item-pinpad {
+			margin-bottom: 100px;
+			filter: blur(5px) brightness(0.7);
+			opacity: 1;
+
+			&-shadow {
+				transform:scale(1);
+				opacity: 1;
+				transition-delay:400ms;
+				filter: blur(5px) brightness(0.7);
+			}
+		}
+		.obj-workspace__item-print-paper {
+			opacity: 0;
+			margin-bottom: 90px;
+		}
+		.obj-workspace__item-card {
+			opacity: 0;
+			margin-bottom: 100px;
+		}
+		.obj-workspace__canvas-header {
+			opacity: 1;
+			margin-bottom: 420px;
+		}
+		.obj-workspace__slide-title {
+			animation: titleReverce 0.5s forwards;
+		}
+
+	}
+
+	// slides
+
+	&[data-slide="0"] {
+		.obj-workspace__slide-title.-s0 {
+			animation: titleStart 0.6s forwards;
+			opacity: 1;
+		}
+	}
+	&[data-slide="1"] {
+		.obj-workspace__slide-title.-s1 {
+			animation: titleStart 0.6s forwards;
+		}
+	}
+	&[data-slide="2"] {
+		.obj-workspace__slide-title.-s2 {
+			animation: titleStart 0.6s forwards;
+		}
+	}
+	&[data-slide="3"] {
+		.obj-workspace__slide-title.-s3 {
+			animation: titleStart 0.6s forwards;
+		}
+	}
+	&[data-slide="4"] {
+		.obj-workspace__slide-title.-s4 {
+			animation: titleStart 0.6s forwards;
+		}
+		.obj-workspace__item-pinpad {
+			animation: pinpadStart 0.4s forwards;
+			&-shadow {
+				animation: pinpadShadowStart 0.4s forwards;
+			}
+		}
+		.obj-workspace__item-card {
+			opacity: 1;
+			transition-delay:400ms;
+			transform: translate(-290px,0px);
+		}
+	}
+	&[data-slide="5"] {
+		.obj-workspace__slide-title.-s5 {
+			animation: titleStart 0.6s forwards;
+		}
+		.obj-workspace__item-printer {
+			animation: printerStart 0.5s forwards;
+			&-shadow {
+				animation: printerShadowStart 0.5s forwards;
+			}
+		}
+		.obj-workspace__item-print-paper {
+			transition-delay:600ms;
+			transform: translate(0px, -102px);
+			opacity: 1;
+		}
+	}
+}
+
+// keyframes
+@keyframes pinpadStart {
+	0% {
+		transform: translate(0px,0);
+	}
+    50% {
+    	transform: translate(110px,-40px);
+    }
+    100% {
+    	z-index: 105;
+    	transform: translate(0px,100px);
+    	filter: blur(0px) brightness(1);
+    }
+}
+@keyframes pinpadReverce {
+	0% {
+		transform: translate(0px,50px);
+	}
+    30% {
+    	transform: translate(110px,-40px);
+    }
+    100% {
+		transform: translate(0px,0px);
+    }
+}
+@keyframes pinpadShadowStart {
+	0% {
+		transform: translate(0px,0);
+		transform:scale(1);
+	}
+    50% {
+    	transform: translate(110px,50px) scale(0.4);
+    	filter: blur(3px) brightness(0.5);
+    }
+    100% {
+    	z-index: 105;
+    	filter: blur(0px) brightness(1);
+    	transform: translate(0px,100px) scale(1);
+    }
+}
+@keyframes pinpadShadowReverce {
+	0% {
+    	z-index: 105;
+    	filter: blur(0px) brightness(1);
+    	transform: translate(0px,100px) scale(1);
+	}
+    50% {
+    	transform: translate(110px,50px) scale(0.4);
+    	filter: blur(3px) brightness(0.5);
+    }
+    100% {
+    	transform: translate(0px,0);
+		transform:scale(1);
+    }
+}
+@keyframes printerStart {
+	0% {
+		transform: translate(0px,0);
+	}
+    50% {
+    	transform: translate(-150px,-140px);
+    }
+    100% {
+    	z-index: 105;
+    	transform: translate(-20px,90px);
+    	filter: blur(0px) brightness(1);
+    }
+}
+@keyframes printerReverce {
+	0% {
+		transform: translate(-20px,90px);
+	}
+    30% {
+    	transform: translate(-150px,-140px);
+    }
+    100% {
+		transform: translate(0px,0px);
+    }
+}
+@keyframes printerShadowStart {
+	0% {
+		transform: translate(0px,0);
+	}
+    50% {
+    	transform: translate(-120px,-70px) scale(0.4);
+    	filter: blur(4px) brightness(0.5);
+    }
+    100% {
+    	z-index: 105;
+    	transform: translate(-0px,90px) scale(1);
+    	filter: blur(0px) brightness(1);
+    }
+}
+@keyframes printerShadowReverce {
+	0% {
+		transform: translate(0px,0);
+	}
+    50% {
+    	transform: translate(-80px,-20px) scale(0.4);
+    }
+    100% {
+    	z-index: 49;
+    	transform: translate(0px,0px) scale(1);
+    	filter: blur(0px) brightness(1);
+    }
+}
+@keyframes titleStart {
+	0% {
+		transform: translate(0px,100px);
+	}
+	66% {
+    	transform: translate(0px,-2px);
+    }
+    68%,100% {
+    	transform: translate(0px,0px);
+    	opacity: 1;
+    }
+}
+@keyframes titleReverce {
+	0% {
+		transform: translate(0px,0px);
+		opacity: 1;
+	}
+    30%,100% {
+    	transform: translate(-600px,0px);
+    	opacity: 0;
+    }
 }

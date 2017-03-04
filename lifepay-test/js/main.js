@@ -182,9 +182,11 @@ $(function() {
 				});
 			},
 			scrollWindow : function(type) {
-				$('html, body').bind('DOMMouseScroll mousewheel MozMousePixelScroll', function (e) {
+				// $('html, body').bind('DOMMouseScroll mousewheel MozMousePixelScroll', function (e) {
+				$(window).scroll(function (e) {
 					if(type == 'baseLoad') {
-						self.fn.setDelta(e.originalEvent.wheelDelta);
+						// console.log(e);
+						// self.fn.setDelta(e.originalEvent.wheelDelta);
 						self.fn.checkWindowScroll();
 						self.fn.checkAnimateMode();
 
@@ -193,38 +195,39 @@ $(function() {
 							$('html, body').off();
 						}
 					} else {
-						self.fn.setDelta(e.originalEvent.wheelDelta);
-						self.fn.checkAnimateMode();
-						self.fn.checkWindowScroll();
+						// self.fn.setDelta(e.originalEvent.wheelDelta);
+						// self.fn.checkAnimateMode();
+						// self.fn.checkWindowScroll();
 
 
-						switch (params.ScrollMode) {
-							case 'lock' :
-								e.originalEvent.wheelDelta = 0;
-								return false;
-								break;
-							case 'top':
-								break;
-							case 'animation':
-								self.fn.changeStep();
-								self.fn.actionViewAnimate();
-								self.fn.actionViewPagination();
-								self.fn.actionViewCheckControls();
-								self.fn.actionViewChangeSlide();
-								self.fn.actionViewPagination();
+						// switch (params.ScrollMode) {
+						// 	case 'lock' :
+						// 		e.originalEvent.wheelDelta = 0;
+						// 		return false;
+						// 		break;
+						// 	case 'top':
+						// 		break;
+						// 	case 'animation':
+						// 		self.fn.changeStep();
+						// 		self.fn.actionViewAnimate();
+						// 		self.fn.actionViewPagination();
+						// 		self.fn.actionViewCheckControls();
+						// 		self.fn.actionViewChangeSlide();
+						// 		self.fn.actionViewPagination();
 
-								return false;
-								break;
-							case 'block':
-								self.fn.actionScrollAnimate();
-								return false;
+						// 		return false;
+						// 		break;
+						// 	case 'block':
+						// 		self.fn.actionShowAnimation();
+						// 		self.fn.actionScrollAnimate();
+						// 		return false;
 
-								break;
+						// 		break;
 						
-							default:
+						// 	default:
 
-								break;
-						}
+						// 		break;
+						// }
 					}
 
 				});

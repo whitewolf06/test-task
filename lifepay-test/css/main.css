@@ -123,10 +123,10 @@ body {
   position: absolute;
   left: 50%;
   bottom: 15px;
-  margin: -160px 0 0 -250px;
+  margin: -160px 0 0 -260px;
   background: url(../img/images-animation/tablet.png) 0 0 no-repeat;
   background-size: contain;
-  padding: 20px 42px 0 45px;
+  padding: 21px 42px 0 46px;
   z-index: 100;
   box-sizing: border-box; }
   .obj-workspace__item-tablet-inner {
@@ -212,13 +212,24 @@ body {
     background: url(../img/images-animation/printer-shadows.png) center no-repeat;
     background-size: contain;
     z-index: 49; }
+.obj-workspace__item-stamp {
+  width: 347px;
+  height: 190px;
+  display: block;
+  position: absolute;
+  left: 50%;
+  bottom: 15px;
+  background: url(../img/images-animation/stamp.png) 0 0 no-repeat;
+  background-size: contain;
+  z-index: 120;
+  margin: 0 0 310px 150px; }
 
 .obj-workspace__canvas .obj-workspace__item-printer,
 .obj-workspace__canvas .obj-workspace__item-print-paper,
 .obj-workspace__canvas .obj-workspace__item-pinpad,
 .obj-workspace__canvas .obj-workspace__item-tablet,
 .obj-workspace__canvas .obj-workspace__item-card {
-  margin-bottom: 600px;
+  margin-bottom: 450px;
   transition: all 1s ease;
   opacity: 0; }
 .obj-workspace__canvas .obj-workspace__item-printer {
@@ -245,10 +256,10 @@ body {
     animation: pinpadShadowReverce 0.3s forwards; }
 .obj-workspace__canvas .obj-workspace__item-tablet {
   transition-delay: 0;
-  transition-duration: 900ms;
+  transition-duration: 1900ms;
   transition-timing-function: cubic-bezier(0, 0.65, 0, 0.93); }
   .obj-workspace__canvas .obj-workspace__item-tablet-shadow {
-    transition: all 500ms ease;
+    transition: all 1500ms ease;
     transform: scale(0);
     opacity: 0; }
 .obj-workspace__canvas .obj-workspace__item-print-paper {
@@ -268,6 +279,9 @@ body {
   transition-duration: 400ms;
   transition-timing-function: cubic-bezier(0, 0.65, 0, 0.93);
   margin-bottom: 300px;
+  opacity: 0; }
+.obj-workspace__canvas .obj-workspace__item-stamp {
+  transition: opacity 100ms ease;
   opacity: 0; }
 .obj-workspace__canvas.animate .obj-workspace__item-tablet {
   margin-bottom: 0;
@@ -334,6 +348,9 @@ body {
   transition-delay: 600ms;
   transform: translate(0px, -102px);
   opacity: 1; }
+.obj-workspace__canvas[data-slide="5"] .obj-workspace__item-stamp {
+  transition-delay: 1200ms;
+  opacity: 1; }
 
 @keyframes pinpadStart {
   0% {
@@ -393,7 +410,7 @@ body {
   0% {
     transform: translate(0px, 0); }
   50% {
-    transform: translate(-120px, -70px) scale(0.4);
+    transform: translate(-90px, 50px) scale(0.4);
     filter: blur(4px) brightness(0.5); }
   100% {
     z-index: 105;
@@ -401,9 +418,9 @@ body {
     filter: blur(0px) brightness(1); } }
 @keyframes printerShadowReverce {
   0% {
-    transform: translate(0px, 0); }
+    transform: translate(0px, 90px); }
   50% {
-    transform: translate(-80px, -20px) scale(0.4); }
+    transform: translate(-90px, 50px) scale(0.4); }
   100% {
     z-index: 49;
     transform: translate(0px, 0px) scale(1);

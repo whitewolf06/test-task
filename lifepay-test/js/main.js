@@ -18,7 +18,8 @@ $(function() {
 				on: false,
 				end: false,
 				time: 500
-			}
+			},
+			auto : '',
 		}
 
 		this.item =  {
@@ -72,7 +73,17 @@ $(function() {
 					params.scrollDelta = -1;
 				}
 			},
-
+			setAutoPlay : function() {
+				clearInterval(params.auto);
+				params.auto = setInterval(function() {
+				  if (params.animate.stepCur == params.animate.stepMax) {
+				  	clearInterval(params.auto);
+				  }
+				  else {
+				  	$(self.item.sliderBtnNext).click();
+				  }
+				}, 2000);
+			},
 			changeStep : function (index) {
 
 				var newStep = params.scrollDelta;
@@ -192,6 +203,7 @@ $(function() {
 
 						if(params.ScrollMode == 'block') {
 							self.fn.actionShowAnimation();
+							self.fn.setAutoPlay();
 							$('html, body').off();
 						}
 					} else {
@@ -239,7 +251,7 @@ $(function() {
 					self.fn.actionViewChangeSlide();
 					self.fn.actionViewCheckControls();
 					self.fn.actionViewAnimate();
-
+					self.fn.setAutoPlay();
 				});
 			},
 			clickPrev : function() {
@@ -250,6 +262,7 @@ $(function() {
 					self.fn.actionViewChangeSlide();
 					self.fn.actionViewCheckControls();
 					self.fn.actionViewAnimate();
+					self.fn.setAutoPlay();
 
 				});
 			},
@@ -261,9 +274,11 @@ $(function() {
 					self.fn.actionViewChangeSlide();
 					self.fn.actionViewCheckControls();
 					self.fn.actionViewAnimate();
+					self.fn.setAutoPlay();
 
 				});
-			}
+			},
+			
 		}
 
 		// registr events

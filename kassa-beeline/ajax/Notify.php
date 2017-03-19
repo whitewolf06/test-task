@@ -24,7 +24,7 @@ class Notify {
 
 	        $send = ($answer->code == 0) ? true : false;
 
-	        $res = ($answer->code == 0) ? 'Спасибо, что выбрали LifePay. Мы уже звоним вам.' : $answer->message;
+	        $res = ($answer->code == 0) ? 'Спасибо, что выбрали Beeline. Мы уже звоним вам.' : $answer->message;
 
 	    } catch(SoapFault $e) {
 	        $res = 'Возникла техническая проблема. Свяжитесь со службой поддержки.';

@@ -687,7 +687,13 @@ select
     color: #000;
     font-family: 'OfficinaSerif-r';
 }
-
+@media(max-width:800px) {
+	.inblock span {
+		position:absolute;
+		left:0;
+		top	:75px;
+	}
+}
 
 .table
 {
@@ -831,6 +837,11 @@ select
     left: -126px;
     position: absolute;
     margin: 0 0 0 -19px;
+}
+@media(max-width:800px) {
+	.loaded .kassaPromo {
+		margin-top:50px;
+	}
 }
 
 .content 
@@ -1605,7 +1616,7 @@ height: 32px;
 */
 }
 .select_your_terminal > div:hover button.transparent {
-    background: #2679ff;
+    background: #ffb612;
     color: #fff;
     transition: background ease .5s;
 }
@@ -2679,6 +2690,7 @@ only screen and (                min-resolution: 2dppx) {
     padding:5px;
     border-bottom: 1px solid #ccc;
     font-size: 16px;
+    min-width: 150px;
 }
 /*
 .owl-dot:before {
@@ -2707,7 +2719,7 @@ only screen and (                min-resolution: 2dppx) {
     z-index: 1;
 }
 .owl-controls {
-    top: -120px;
+    top: -51px;
     position: absolute;
     left: 50%;
     width: 100%;
@@ -2715,6 +2727,7 @@ only screen and (                min-resolution: 2dppx) {
     transform: translateX(-50%);
     -webkit-transform: translateX(-50%);
     /*	border-bottom: 3px solid #ccc;*/
+    min-width: 150px;
 }
 /*
 .owl-controls:before {
@@ -3494,7 +3507,7 @@ h1, .h1 {
 .pointList li .block {
     width: 40px;
     height: 4px;
-    background: #2679ff;
+    background: #ffb612;
     margin-top: 5px;
     opacity: 0;
 }
@@ -3637,7 +3650,7 @@ div.data li:last-child {
     margin: 10px 10px 10px 160px;
 }
 .kostructor .one.blue {
-    border: 2px solid #2679ff;
+    border: 2px solid #ffb612;
 }
 .count input {
 width: 40px !important;
@@ -3770,10 +3783,12 @@ font-size: 16px !important;
     margin-top: 8px;
 }
 .one_block .two p {
-    color: #2679ff;
+    color: #ffb612;
     margin-top: 47px;
     margin-bottom: 0;
+    font-size:14px;
 	position: relative;
+	 font-family: 'OfficinaSerif-r';
 }
 .one_block .two p:hover {
 	cursor: pointer;
@@ -3782,8 +3797,8 @@ font-size: 16px !important;
 	content: '';
     width: 7px;
     height: 7px;
-    border-bottom: 1px solid #2679ff;
-    border-right: 1px solid #2679ff;
+    border-bottom: 1px solid #ffb612;
+    border-right: 1px solid #ffb612;
     position: absolute;
     right: -10px;
     top: 5px;
@@ -3847,7 +3862,7 @@ font-size: 16px !important;
 .njoy_minimal_2 .two p:last-child,
 .njoy_all_in_2 .two p:last-child,
 .njoy_basis_2 .two p:last-child {
-	color: #2679ff !important;
+	color: #ffb612 !important;
 	font-size: 14px !important;
 	position: relative;
 }
@@ -3862,8 +3877,8 @@ font-size: 16px !important;
     content: '';
     width: 7px;
     height: 7px;
-    border-bottom: 1px solid #2679ff;
-    border-right: 1px solid #2679ff;
+    border-bottom: 1px solid #ffb612;
+    border-right: 1px solid #ffb612;
     position: absolute;
     right: 0px;
     top: 5px;
@@ -3926,19 +3941,18 @@ font-size: 16px !important;
 }
 */
 .wrap_over {
-/*
+    /*
     width: 100%;
     height: 100%;
 */
     display: block;
     overflow: hidden;
-    margin: 40px auto;
+    margin: 0 auto;
     background: url(../img/Macbook-SpaceGrey.png) no-repeat center bottom;
- background-size: 100%;
- padding: 6% 11% 5%;
-
+    background-size: 100%;
+    padding: 153px 11% 5%;
     box-sizing: border-box;
-}
+    }
 .owl-carousel .owl-controls .owl-nav .owl-prev,
 .owl-carousel .owl-controls .owl-nav .owl-next,
 .owl-carousel .owl-controls .owl-dot {

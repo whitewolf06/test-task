@@ -133,10 +133,10 @@ input:not([type="radio"]):not([type="checkbox"]) {
 }
 .slide:first-child .text
 {
-	margin: 35px 0 0;
+	margin: 79px 0 0;
 	top: 205px;
 	position: relative;
-    right: inherit;
+	right: inherit;
 }
 .slide:first-child p {
     text-align: center;
@@ -1125,7 +1125,7 @@ only screen and (                min-resolution: 2dppx) {
 .what_is .four p:first-child,
 .what_is .five p:first-child {
 	padding: 10px;
-	background: #2679ff;
+	background: #fad327;
 	color: #fff;
 	width: 12px;
 	height: 12px;
@@ -1134,7 +1134,7 @@ only screen and (                min-resolution: 2dppx) {
 	display: block;
 	margin: 0;
 	text-align: center;
-    font-size: 21px;
+	font-size: 21px;
 }
 .what_is .one .block,
 .what_is .two .block,

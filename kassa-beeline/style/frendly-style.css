@@ -71,6 +71,7 @@
 }
 
 
+
 /* footer */
 
 
@@ -95,4 +96,14 @@
 .obj-footer__mail {
     color: #000;
     font-size: 16px;
+}
+
+@media(max-width:1000px) {
+	.obj-support__row {
+		flex-wrap:wrap;
+	}
+	.obj-support__col {
+		width:100%;
+		margin-bottom:35px;
+	}
 }

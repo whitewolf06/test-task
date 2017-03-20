@@ -244,7 +244,7 @@ $(window).trigger('resize');
 
                 function get_sum(){
 
-                    var sum = 26480;
+                    var sum = 7990;
 
                     $('.form_goods_order').each(function(){
                         sum += parseInt($(this).find('.price_sp').text().replace(/\s+/g, '')) * parseInt($(this).find('input').val());
@@ -276,7 +276,7 @@ $(window).trigger('resize');
 
                 function get_sum_2(){
 
-                    var sum_2 = 38680;
+                    var sum_2 = 15590;
 
                     $('.form_goods_order_2').each(function(){
                         sum_2 += parseInt($(this).find('.price_sp_2').text().replace(/\s+/g, '')) * parseInt($(this).find('input').val());

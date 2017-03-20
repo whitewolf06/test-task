@@ -1592,7 +1592,7 @@ height: 32px;
 .select_your_terminal > div {
     display: inline-block;
     vertical-align: top;
-    width: 160px;
+    width: 200px;
     padding:  55px 20px 32px;
     box-sizing: border-box;
     -webkit-transition: box-shadow ease .5s;
@@ -1894,7 +1894,7 @@ height: 32px;
 .largeOffset {
     margin: 50px auto 32px;
     max-width: 620px;
-    text-align: left;
+    text-align: center;
     color: #333437;
     font-size: 32px;
 }

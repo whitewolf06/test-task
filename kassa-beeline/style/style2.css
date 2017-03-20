@@ -1619,7 +1619,7 @@ height: 32px;
     transition: background ease .5s;
 }
 .select_your_terminal > div:hover button.transparent:hover {
-    background: #1e61cc;
+    background: #ffb612;
     color: #fff;
     transition: background ease .5s;
 }
@@ -2054,7 +2054,7 @@ h1.largeOffsetTop {
 }
 .links ul a li:hover {
 /*    text-decoration: none;*/
-    color: #1E61CC;
+    color: #ffb612;
 }
 .wrap_half {
     margin: 0 auto;
@@ -3782,7 +3782,7 @@ font-size: 16px !important;
 	.slider button:hover,
 .button:hover
 	{
-		background: #1E61CC;
+		background: #ffb612;
         border-color: transparent;
         color: #fff !important;
         -webkit-transition: box-shadow .3s linear, background .3s linear;

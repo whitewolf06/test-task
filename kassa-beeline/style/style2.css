@@ -2194,12 +2194,7 @@ header .inblock img {
 }
 
 @media
-only screen and (-webkit-min-device-pixel-ratio: 2),
-only screen and (   min--moz-device-pixel-ratio: 2),
-only screen and (        min-device-pixel-ratio: 2),
-only screen and (                -webkit-min-device-pixel-ratio: 2),
-only screen and (                min-resolution: 192dpi),
-only screen and (                min-resolution: 2dppx) { 
+only screen and (-webkit-min-device-pixel-ratio: 2), not all, not all, only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) { 
     
     .arrow:after {
         background: url(../img/retina/Sprite-POS_1.png) no-repeat -545px -17px !important;
@@ -2222,7 +2217,7 @@ only screen and (                min-resolution: 2dppx) {
     }
 
     .loaded .kassaPromo{
-        background: url(../img/retina/Reg-TOP.png) right center no-repeat;
+        background: url(../img-b/Reg-TOP.png) right center no-repeat;
         -webkit-background-size: 503px 299px;
         background-size: 503px 299px;
     }
@@ -2338,15 +2333,15 @@ only screen and (                min-resolution: 2dppx) {
     }
 */
     .njoy_basis_2.one {
-        background: url(../img/retina/Reg-min.png) no-repeat top 28px left 49px !important;
+        background: url(../img-b/pin.png) no-repeat top 28px left 49px !important;
         -webkit-background-size: 93px 53px !important;
         background-size: 93px 53px !important;
         height: 96px !important;
     }
     .njoy_minimal {
-    	background: url(../img/retina/Reg-min.png) no-repeat top 30px left 130px !important;
-        -webkit-background-size: 209px 111px !important;
-        background-size: 209px 111px !important;
+    	background: url(../img-b/pin.png) no-repeat top 30px center;
+    	-webkit-background-size: 209px 111px !important;
+    	background-size: 129px !important;
     }
     .njoy_basis {
     	background: url(../img/retina/basic.png) no-repeat top 30px left 90px !important;
@@ -2354,10 +2349,9 @@ only screen and (                min-resolution: 2dppx) {
         background-size: 281px 141px !important;
     }
     .njoy_basis_2 {
-        background: url(../img/retina/basic.png) no-repeat center left 32px !important; 
+        background: url(../img-b/kassa-eq.png) no-repeat center left 32px !important;
         -webkit-background-size: 130px 67px !important;
         background-size: 130px 67px !important;
-        
     }
     .njoy_all_in {
     	background: url(../img/retina/Reg-full.png) no-repeat top 30px left -9px !important;
@@ -2365,22 +2359,21 @@ only screen and (                min-resolution: 2dppx) {
         background-size: 453px 210px !important;
     }
     .njoy_basis_2.two {
-        background: url(../img/retina/Reg-full.png) no-repeat top 24px left -9px !important;
+        background: url(../img-b/kassa-ekv-fisk.png) no-repeat top 24px left 22px !important;
         -webkit-background-size: 200px 100px !important;
-        background-size: 200px 100px !important;
-        
+        background-size: 149px !important;
     }
     .njoy_minimal.njoy_slide.inside_one {
         background: no-repeat top 30px center;
 	    background-size: cover;
     }
     .njoy_minimal.njoy_slide.inside_two {
-        background: url(../img/retina/basic.png) no-repeat top 30px center !important;
+        background: url(../img-b/kassa-eq.png) no-repeat top 30px center !important;
         -webkit-background-size: 203px 106px !important;
         background-size: 203px 106px !important;
     }
     .njoy_minimal.njoy_slide.inside_tree {
-        background: url(../img/retina/Reg-full.png) no-repeat top 30px center !important;
+        background: url(../img-b/kassa-ekv-fisk.png) no-repeat top 3px center !important;
         -webkit-background-size: 253px 123px !important;
         background-size: 253px 123px !important;
     }
@@ -3556,10 +3549,7 @@ display: inline-block;
 }
 
 .accordion
-{
-/*    width:255px;*/
-    margin: 40px auto 0px;
-}
+{/*    width:255px;*/margin: 30px auto 0px;}
 .accordion-item {
     font-size: 20px;
     margin: 0 25px 0 10px;
@@ -3949,6 +3939,7 @@ font-size: 16px !important;
     overflow: hidden;
     margin: 0 auto;
     background: url(../img/Macbook-SpaceGrey.png) no-repeat top;
+    background: url(../img-b/macbook-moc.png) no-repeat top;
     background-size: 100%;
     padding: 2px 11% 5%;
     box-sizing: border-box;
@@ -4583,7 +4574,7 @@ font-size: 16px !important;
     
 }
 .njoy_minimal.njoy_slide.inside_one {
-    background: url(../img/Reg-min.png) no-repeat top 30px center;
+    background: url(../img-b/pin.png) no-repeat top 30px center;
 }
 .njoy_minimal.njoy_slide.inside_two {
     background: url(../img/basic.png) no-repeat top 30px center;

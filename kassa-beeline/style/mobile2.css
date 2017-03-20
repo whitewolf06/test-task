@@ -989,7 +989,8 @@ only screen and (                min-resolution: 2dppx) {
 .njoy_basis .two {
     text-align: center;
     padding: 0 10px 0px;
-	margin-bottom: 20px;
+    margin-bottom: 20px;
+    float: none;
 }
 .njoy_minimal div,
 .njoy_all_in div,
@@ -1010,8 +1011,9 @@ only screen and (                min-resolution: 2dppx) {
 }
 */
 .njoy_minimal .one {
-	padding-top: 185px;
-    margin-bottom: 20px;
+	padding-top: 140px;
+	margin-bottom: 20px;
+	padding-left: 0;
 }
 .njoy_minimal:before, .njoy_basis:before {
 	display: none;

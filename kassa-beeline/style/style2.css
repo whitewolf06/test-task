@@ -3442,7 +3442,7 @@ font-size: 16px !important;
 }
 .one_block .one p:last-child {
     font-size: 20px;
-    color: #ccc;
+    color: #8a8a8a;
     margin-bottom: 16px;
     margin-top: 8px;
 }
@@ -3552,7 +3552,7 @@ font-size: 16px !important;
 .njoy_minimal_2 .two p,
 .njoy_all_in_2 .two p,
 .njoy_basis_2 .two p {
-	color: #ccc;
+	color: #8a8a8a;
 	font-size: 16px;
 }
 

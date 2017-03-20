@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru" ng-app="app">
+<head>
+	<meta charset="UTF-8">
+	<title>Cart - Test task</title>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-
+	BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<script type="text/javascript" src="main.js"></script>
+
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 col-md-push-2">
+
+				<div class="cart-header" ng-controller="CartHeader">
+					<h3>Добавить продукт</h3>
+					<div class="navbar-wrapper">
+						<div class="navbar navbar-default">
+							<div class="navbar-form navbar-left">
+								<form class="form-inline" ng-init="form">
+								  <div class="form-group">
+								    <label for="exampleInputEmail3">Продукт</label>
+								    <input type="text" class="form-control" ng-model="form.name">
+								  </div>
+								  <div class="form-group">
+								    <label for="exampleInputPassword3">Цена</label>
+								    <input type="number" class="form-control" ng-model="form.price" min="0" style="width:100px;">
+								    <span>р</span>
+								  </div>
+								  <button type="submit" class="btn btn-primary" ng-click="submit()">Добавить</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="cart-content" ng-controller="CartContent">
+					<h1>Корзина</h1>
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th width="50%">Продукт:</th>
+								<th width="120">Цена:</th>
+								<th width="120">Цена со скидкой:</th>
+								<th width="50"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="item in productArr">
+								<td>{{item.name}}</td>
+								<td>{{item.price}} р </td>
+								<td>{{item.discountPrice}} р</td>
+								<td align="right"><a href="javascript:void(0)" class="btn btn-danger btn-xs" ng-click="remove($index)">Удалить</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<div class="cart-footer" ng-controller="CartFooter">
+					<h3>Применить скидку</h3>
+					<div class="navbar navbar-default">
+						<div class="navbar-form navbar-left">
+							<form class="form-inline" ng-init="form">
+								<div class="form-group">
+									<label for="exampleInputEmail3">Скидка</label>
+									<input type="number" class="form-control" ng-model="form.discount" min="0" style="width:100px;">
+									<span>Руб</span>
+								</div>
+								<button type="submit" class="btn btn-success" ng-click="submit()">Применить</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

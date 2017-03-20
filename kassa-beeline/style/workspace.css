@@ -416,13 +416,16 @@ body {
   .obj-workspace__item-tablet {
     width: 320px;
     bottom: -65px;
-    margin-left: -150px;
+    margin-left: -160px;
     padding: 13px 25px 0 29px;
   }
   .obj-workspace__item-tablet-inner {
     max-height: 199px;
     overflow:hidden;
     position:relative;
+  }
+  .obj-workspace__slider-item {
+    min-width:266px;
   }
   .obj-workspace__canvas {
     margin-bottom: -94px;

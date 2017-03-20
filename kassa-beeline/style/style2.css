@@ -4248,12 +4248,13 @@ font-size: 16px !important;
 }
 .njoy_minimal.njoy_slide.inside_one {
     background: url(../img-b/pin.png) no-repeat top 30px center;
+    background-size: 181px;
 }
 .njoy_minimal.njoy_slide.inside_two {
-    background: url(../img/basic.png) no-repeat top 30px center;
+    background: url(../img-b/kassa-eq.png) no-repeat top 5px center;
 }
 .njoy_minimal.njoy_slide.inside_tree {
-    background: url(../img/Reg-full.png) no-repeat top 30px center;
+    background: url(../img-b/kassa-ekv-fisk.png) no-repeat top 5px center;
 }
 .katalog{
     position: relative;

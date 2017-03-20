@@ -939,9 +939,9 @@ $(function() {
                 var width = $(self.item.sliderWrap).width();
                 
                 var steps = params.animate.stepMax;
-                if($('body').width() < 600) {
-                    width = width*2.35;
-                }
+                // if($('body').width() < 600) {
+                //     width = width*2.35;
+                // }
                 $(self.item.sliderRoll).css({'width': (width*steps)+'px',});
                 $(self.item.sliderItem).css({'width': width+'px',});
             },

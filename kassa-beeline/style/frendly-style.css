@@ -27,7 +27,7 @@
     box-shadow: 0 3px 0 0 #ebb072;
 }
 .ui--btn.-yellow:hover {
-	background:#ebb072;
+    background:#ebb072;
 }
 
 .layout--footer {
@@ -35,39 +35,39 @@
     background:#f7f8fa;
 }
 .partial.-support {
-	padding: 80px 0 50px;
-	background:#fff;
+    padding: 80px 0 50px;
+    background:#fff;
 }
 
 /* obj support */
 .obj-support__wrapper {}
 .obj-support__title {}
 .obj-support__row {
-	display: block;
-	width: 100%;
-	max-width: 800px;
-	margin: 55px auto 20px;
-	display: flex;
+    display: block;
+    width: 100%;
+    max-width: 800px;
+    margin: 55px auto 20px;
+    display: flex;
 }
 .obj-support__col {
-	text-align: center;
-	box-sizing:border-box;
-	padding: 0 20px;
-	width: 50%;
+    text-align: center;
+    box-sizing:border-box;
+    padding: 0 20px;
+    width: 50%;
 }
 .obj-support__icon {
-	display: inline-block;
-	vertical-align: top;
-	width: 29px;
-	height: 30px;
-	background:url(../img/sprite.png) no-repeat 0 0;
+    display: inline-block;
+    vertical-align: top;
+    width: 29px;
+    height: 30px;
+    background:url(../img/sprite.png) no-repeat 0 0;
 }
 .obj-support__string {
-	line-height: 24px;
-	font-size: 16px;
-	display: block;
-	text-align: center;
-	margin: 20px 0 0;
+    line-height: 24px;
+    font-size: 16px;
+    display: block;
+    text-align: center;
+    margin: 20px 0 0;
 }
 
 
@@ -79,7 +79,7 @@
     text-align:center;
 }
 .obj-footer__item {
-    margin-bottom: 32px;
+    margin-bottom: 12px;
 }
 .obj-footer__string {
     display:inline-block;
@@ -97,13 +97,20 @@
     color: #000;
     font-size: 16px;
 }
+.obj-footer__text {
+    padding: 0 20px;
+    font-size: 14px;
+    line-height: 18px;
+    color: #696969;
+    margin-top: 37px;
+}
 
 @media(max-width:1000px) {
-	.obj-support__row {
-		flex-wrap:wrap;
-	}
-	.obj-support__col {
-		width:100%;
-		margin-bottom:35px;
-	}
+    .obj-support__row {
+        flex-wrap:wrap;
+    }
+    .obj-support__col {
+        width:100%;
+        margin-bottom:35px;
+    }
 }

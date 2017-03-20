@@ -289,6 +289,9 @@ $(function() {
 		this.ev.clickPrev();
 		this.ev.clickNext();
 		this.ev.scrollWindow('baseLoad');
+
+		
+
 	}; 
 
 	var workspace = new WidgetWorkSpace();

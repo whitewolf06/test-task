@@ -820,7 +820,7 @@ $(function() {
             lockBtn :  '-lock',
             animate : {
                 stepCur : 0,
-                stepMax : 7,
+                stepMax : 6,
                 on: false,
                 end: false,
                 time: 500
@@ -947,9 +947,10 @@ $(function() {
             },
             actionViewChangeSlide: function() {
                 var width = $(self.item.sliderWrap).width();
-                if($('body').width() < 600) {
-                    width = width*2.35;
-                }
+                console.log(width);
+                // if($('body').width() < 600) {
+                //     width = width*2.35;
+                // }
                 var curStep = params.animate.stepCur;
                 $(self.item.sliderRoll).css({'transform': 'translate(-'+width*curStep+'px, 0px)'});
         

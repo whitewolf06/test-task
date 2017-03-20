@@ -352,10 +352,9 @@ button
 	border: 0;
 	border-radius: 100px;
 	box-sizing: border-box;
-	padding: 5px 40px;
+	padding: 5px 40px 3px;
 	border-radius: 100px;
 	background-image: linear-gradient(to bottom, #f8c15b, #fdd16a);
-	font-family: OfficinaSerifBookC;
 	font-size: 14px;
 	font-weight: normal;
 	font-style: normal;
@@ -1187,17 +1186,16 @@ height: 32px;
 .popup 
 {
 	position: fixed;
-    display: table;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    background: rgba(0,0,0,.4);
-    z-index: 9;
-    left: -1000%;
-    opacity: 0;
-
-    -webkit-transition: opacity .3s linear;
-    transition: opacity .3s linear;
+	display: table;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	background: rgba(0,0,0,.4);
+	z-index: 100;
+	left: -1000%;
+	opacity: 0;
+	-webkit-transition: opacity .3s linear;
+	transition: opacity .3s linear;
 }
 .popup:before {
     content: '';
@@ -1656,6 +1654,7 @@ height: 32px;
     line-height: 22px;
     box-sizing: border-box;
     height: 32px;
+    font-family: 'OfficinaSerif-r';
 }
 .select_your_terminal > div li span.blue {
     width: 13px;
@@ -2564,6 +2563,8 @@ only screen and (                min-resolution: 2dppx) {
 		position: relative;
 		vertical-align: top;
 		padding: 3% 0% 0%;
+		overflow: hidden;
+		max-height: 495px;
 	}
 
 		.packList img 
@@ -2719,7 +2720,7 @@ only screen and (                min-resolution: 2dppx) {
     z-index: 1;
 }
 .owl-controls {
-    top: -51px;
+    top: -93px;
     position: absolute;
     left: 50%;
     width: 100%;
@@ -3277,7 +3278,7 @@ only screen and (                min-resolution: 2dppx) {
 	background: url(../img-b/kassa-eq.png) no-repeat  left 120px top 36px;
 }
 .njoy_all_in {
-	background: url(../img-b/kassa-eq.png) no-repeat  left 120px top 36px;
+	background: url(../img-b/kassa-ekv-fisk.png) no-repeat  left 120px top 36px;
 }
 .njoy {
 	font-size: 24px;
@@ -3818,17 +3819,17 @@ font-size: 16px !important;
 	display: none;
 }
 .njoy_basis_2.one {
-    background: url(../img/basic.png) no-repeat center left 5px;
+    background: url(../img-b/pin.png) no-repeat center left 5px;
     height: 128px;
-    background-size: 165px 85px;
+    background-size: 165px;
 }
 .njoy_basis_2.two {
-    background: url(../img/images-desktop/Reg-full.png) no-repeat center left -10px;
+    background:url(../img-b/kassa-ekv-fisk.png) no-repeat center left -8px;
     height: 140px;
-    background-size: 191px 100px;
+    background-size: 200px;
 }
 .njoy_basis_2 {
-    background: url(../img/images-desktop/Reg-basic.png) no-repeat center left -14px;
+    background: url(../img-b/kassa-eq.png) no-repeat center left -14px;
     height: 128px;
     background-size: 215px 100px;
     position: relative;
@@ -3902,13 +3903,12 @@ font-size: 16px !important;
  */
 .owl-carousel {
   display: none;
-/*  width: 1000px;*/
-    margin: 0 auto;
-    overflow: hidden;
+  /*  width: 1000px;*/
+  margin: 0px auto 0;
+  overflow: hidden;
   -webkit-tap-highlight-color: transparent;
   /* position relative and z-index fix webkit rendering fonts issue */
   z-index: 1;
-
 }
 .owl-carousel .owl-stage {
   position: relative;
@@ -3948,9 +3948,9 @@ font-size: 16px !important;
     display: block;
     overflow: hidden;
     margin: 0 auto;
-    background: url(../img/Macbook-SpaceGrey.png) no-repeat center bottom;
+    background: url(../img/Macbook-SpaceGrey.png) no-repeat top;
     background-size: 100%;
-    padding: 153px 11% 5%;
+    padding: 2px 11% 5%;
     box-sizing: border-box;
     }
 .owl-carousel .owl-controls .owl-nav .owl-prev,
@@ -4607,8 +4607,6 @@ font-size: 16px !important;
 .select_your_terminal > div li.kat_text {
     padding: 4px 0;
     color: #888;
-    font-family: 'avenir-demi';
-    
 }
 .select_your_terminal > div li.kat_text:before {
     display: none;

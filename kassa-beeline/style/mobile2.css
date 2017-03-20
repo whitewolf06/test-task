@@ -168,6 +168,8 @@ input:not([type="radio"]):not([type="checkbox"]) {
 .slide:first-child h1 
 {
     margin: 24px 0;
+    font-size: 25px;
+    line-height: 32px;
 }
 
 .slide .transparent button 
@@ -729,7 +731,9 @@ input:not([type="radio"]):not([type="checkbox"]) {
 	text-align: center;
     font-size: 16px;
 } 
-
+.mob {
+	display:block;
+}
 .wauto 
 {
 	float: none;

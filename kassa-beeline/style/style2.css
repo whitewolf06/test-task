@@ -2631,7 +2631,9 @@ header .inblock img {
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
-
+.mob {
+	display:none;
+} 
 .workplacer 
 {
 	background: url(../img/background_wall.png) center 10px no-repeat;

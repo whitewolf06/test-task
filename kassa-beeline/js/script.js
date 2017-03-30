@@ -987,7 +987,7 @@ $(function() {
         this.ev = {
             baseLoad: function() {
                 self.fn.checkWindowSize();
-                self.fn.setCanvasSize();
+                // self.fn.setCanvasSize();
                 self.fn.checkWindowScroll();
                 self.fn.setScrollMax();
                 self.fn.checkAnimateMode();
@@ -1004,7 +1004,7 @@ $(function() {
             resizeWindow : function() {
                 $(window).resize(function () {
                     self.fn.checkWindowSize();
-                    self.fn.setCanvasSize();
+                    // self.fn.setCanvasSize();
                     self.fn.setScrollMax();
                     self.fn.actionViewSetSlideParams();
                     self.fn.actionViewChangeSlide();

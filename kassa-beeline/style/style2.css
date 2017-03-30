@@ -4312,3 +4312,8 @@ font-size: 16px !important;
 		zoom: .92;
 	}
 }
+
+.head-lk-link {color: #e69e14;font-size:14px;text-decoration:underline;position:absolute;right:180px;top :32px;z-index:10;}
+.head-lk-link:hover {
+text-decoration:none;
+}

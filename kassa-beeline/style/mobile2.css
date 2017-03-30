@@ -97,16 +97,16 @@ header .inblock img
 		display: none !important;
 	}
 
-		header .right_main a 
+		header .right_main .sobaka
 		{
 			font-size: 0;
-    		width: 40px;
-    		height: 40px;
-    		margin: -15px -10px;
-    		position: relative;
+			width: 40px;
+			height: 40px;
+			margin: -27px -10px;
+			position: relative;
 		}
 
-			header .right_main a:after 
+			header .right_main .sobaka:after 
 			{
 				content: "";
 				background: url(../img/Sprite-POS_1.png) -492px -13px no-repeat;
@@ -931,6 +931,10 @@ only screen and (                min-resolution: 2dppx) {
 .center.largeOffset.njoy_h1 {
 	margin-bottom: 11px;
 	margin-top: 29px;
+}
+.head-lk-link {
+right:70px;
+top:36px
 }
 .sale .one {
 	text-align: left;

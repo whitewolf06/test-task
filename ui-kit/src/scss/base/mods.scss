@@ -1,0 +1,34 @@
+@include grid-col(mk,$size-mk);
+@include grid-col(xs,$size-xs);
+@include grid-col(sm,$size-sm);
+@include grid-col(md,$size-md);
+@include grid-col(lg,$size-lg);
+
+@include global-mods(mk,$size-mk);
+@include global-mods(xs,$size-xs);
+@include global-mods(sm,$size-sm);
+@include global-mods(md,$size-md);
+@include global-mods(lg,$size-lg);
+
+.-bg {
+	&-success {
+		color:$color-white;
+		background-color:$color-success;
+	}
+	&-primary {
+		color:$color-white;
+		background-color:$color-primary;
+	}
+	&-warning {
+		color:$color-white;
+		background-color:$color-warning;
+	}
+	&-danger {
+		color:$color-white;
+		background-color:$color-danger;
+	}
+	&-gray {
+		color: $color-text;
+		background-color:$color-gray;
+	}
+}

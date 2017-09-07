@@ -1,0 +1,60 @@
+@mixin grid-col($name,$media) {
+	@media(min-width:$media+'px') {
+		@for $i from 1 through 12{
+			$selector : '.-'+$name+'-'+$i;
+			#{$selector} {
+				width: percentage(1 / 12 * $i);
+				display: block;
+				flex-grow:0;
+			}
+			$push : '.-'+$name+'-push-'+$i;
+			#{$push} {
+				margin-left: percentage(1 / 12 * $i);
+			}
+		}
+		#{'.-'+$name+'-five'} {
+			width: 20%;
+		}
+	}
+}
+
+
+@mixin grid-container($name,$media) {
+	$container-width:$media+(-30);
+	@media(min-width:$media+'px') {
+		& {width: $container-width+px;}
+	}
+
+}
+
+
+@mixin global-mods($name,$media) {
+	@media(min-width:$media+'px') {
+		#{'.-'+$name+'-max'} {
+			flex-grow:1;
+			width: auto;
+		}
+		#{'.-'+$name+'-auto'} {
+			width: auto;
+		}
+		#{'.-'+$name+'-hide'} {
+			display: none;
+		}
+		#{'.-'+$name+'-show'} {
+			display: block;
+		}
+		#{'.-'+$name+'-show-flex'} {
+			display: flex;
+		}
+		#{'.-'+$name+'-push-0'} {
+			margin-left: 0;
+		}
+
+		@for $i from 1 through 20 {
+			$height: $i*5;
+			#{'.-'+$name+'-h-'+$height} {
+				height: $height+px;
+			}			
+		}
+	}
+}

@@ -13,7 +13,7 @@ app.factory('Cart', function () {
 		Discount: 0
 	};
 
-	self.discount = 33;
+	self.discount = 300.44;
 
 	self.addProduct = function(item) {
 		if(!item.name || !item.price) {
@@ -61,6 +61,9 @@ app.factory('Cart', function () {
 			var itemPercent = 100 / summ * item.summ;
 			var itemDiscount = Math.floor(self.discount / 100 * itemPercent);
 			item.discountPrice = item.summ - itemDiscount < 0 ? 0 : item.summ - itemDiscount;
+			// item.discountPrice = item.discountPrice;
+			var test  = item.summ - itemDiscount;
+			console.log(test.toFixed(2));
 			item.discount = itemDiscount;
 
 			discountSumm+= itemDiscount;
@@ -70,8 +73,13 @@ app.factory('Cart', function () {
 			}
 		});
 		var lastDiscountVal = productList[itemId].discountPrice - (self.discount-discountSumm);
-		productList[itemId].discountPrice = lastDiscountVal > 0 ? lastDiscountVal : 0;
-		productList[itemId].discount = productList[itemId].summ - productList[itemId].discountPrice
+		if(lastDiscountVal > 0) {
+			productList[itemId].discountPrice =  lastDiscountVal;
+			productList[itemId].discount = productList[itemId].summ - productList[itemId].discountPrice
+		} else {
+			productList[itemId].discountPrice = 0;
+			productList[itemId].discount += 1; 
+		}
 	};
 
 	self.setDiscount = function(val) {
@@ -113,10 +121,13 @@ app.controller('CartHeader', function ($scope,Cart) {
 app.controller('CartContent', function ($scope,Cart) {
 	$scope.productArr = Cart.getProductList();
 	$scope.resultSumm = Cart.getSumm();
+	// $scope.form = {};
+	// $scope.form.discount = Cart.getDiscount();
 
-	Cart.addProduct({name:'Ноубук HP ProBook',price:1530,count:1});
-	Cart.addProduct({name:'Холодильник BOSH',price:234.44,count:1});
-	Cart.addProduct({name:'Пылесос Philips',price:748.2,count:3});
+	Cart.addProduct({name:'Ноубук HP ProBook',price:100.40,count:2});
+	Cart.addProduct({name:'Ноубук HP ProBook',price:100.77,count:1});
+	// Cart.addProduct({name:'Холодильник BOSH',price:234.44,count:1});
+	// Cart.addProduct({name:'Пылесос Philips',price:748.2,count:3});
 
 	$scope.$watchCollection(Cart.getProductCount, function() {
         Cart.updateProductsDiscount();

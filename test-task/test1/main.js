@@ -10,19 +10,26 @@ app.factory('Cart', function () {
 		One : 0,
 		All : 0,
 		DiscountAll: 0,
-		Discount: 0
+		Discount: 0,
+		result: 0
 	};
 
-	self.discount = 300.44;
+	self.discount = 131.57;
 
 	self.addProduct = function(item) {
-		if(!item.name || !item.price) {
-			return false;
-		}
-		item.summ = item.count*item.price;
-		item.summ = item.summ.toFixed(2);
-		productList.push(item);
-		
+		var newItem = {
+			name: item.name || 'defaultName', // Название товара
+			count: item.count || 1, // Количество
+			basePrice: item.basePrice || 100, // Базовая цена на позицию 
+			discountPrice : item.basePrice || 100, // Цена со скидкой на позицию 
+			resultPrice: item.basePrice || 100,
+			baseSumm: 0, // Базовая сумма позиции
+			discountSumm : 0, // Базовая сумма позиции 
+			discountPosition: 0 // Общая скидка на позицию
+		};
+		newItem.baseSumm = Number( (item.count*item.basePrice).toFixed(2) ),
+		newItem.discountSumm = newItem.baseSumm;
+		productList.push(newItem);
 	};
 	self.calculateSumm = function() {
 		summ.One = 0;
@@ -30,56 +37,93 @@ app.factory('Cart', function () {
 		summ.DiscountAll = 0;
 		summ.Discount = 0;
 		angular.forEach(productList, function(item, key) {
-			summ.One += item.price;
-			summ.All += (item.price * item.count);
-			summ.DiscountAll += item.discountPrice;
-			summ.Discount += item.discount;
+			summ.One += item.basePrice;
+			summ.All += (item.basePrice * item.count);
+			summ.DiscountAll += item.discountSumm;
+			summ.Discount += item.discountPosition;
 		});
 		for(var key in summ) {
-			summ[key] = summ[key].toFixed(2);
+			summ[key] = Number( summ[key].toFixed(2) );
 		}
+		summ.result = Number( (summ.DiscountAll + summ.Discount ).toFixed(2) );
 	};
 	self.removeProduct = function(index) {
 		productList.splice(index,1);
 	};
 
+	var itemCalculete = function(item) {
+		item.discountPrice = item.discountPosition;
+
+		if(item.count > 1) {
+			item.discountPrice = Number( (item.discountPosition / item.count).toFixed(2) );
+		}
+		item.resultPrice = Number( (item.basePrice - item.discountPrice).toFixed(2) ); 
+		item.discountSumm = Number( (item.resultPrice * item.count).toFixed(2) );
+		return item;
+	};
+	var resultCalculate = function(item,excess) {
+		if(item.count > 1) {
+
+		} else {
+			if(excess > 0) {
+				// item.discountSumm -= excess;
+			} else {
+				// item.discountPosition = Number( (item.discountPosition - excess).toFixed(2) );
+				// item.discountPrice = item.discountPosition;
+				// item.discountSumm -= excess;
+				// item.discountPrice += excess;
+			}
+			// console.log(item.discountPosition,item.discountPrice,item.resultPrice)
+			// item.discountPosition = Number(item.discountPosition.toFixed(2));
+			// console.log(item.discountPosition,item.discountPrice,item.resultPrice)
+			// item = itemCalculete(item);
+		}
+			console.log(excess)
+		return item;
+	}
 	self.updateProductsDiscount = function() {
+
 		if(productList.length == 0) {
 			return false;
 		}
 		var discountSumm = 0;
 		var itemId;
 		var prices = productList.map(function(item){
-			return Number(item.summ)
+			return Number(item.baseSumm)
 		});
 		var summ = prices.reduce(function(prevVal,curVal) {
 			return prevVal + curVal;
 		});
 		var maxPrice = Math.max.apply(Math,prices);
-
 		angular.forEach(productList, function(item, key) {
-			var itemPercent = 100 / summ * item.summ;
-			var itemDiscount = Math.floor(self.discount / 100 * itemPercent);
-			item.discountPrice = item.summ - itemDiscount < 0 ? 0 : item.summ - itemDiscount;
-			// item.discountPrice = item.discountPrice;
-			var test  = item.summ - itemDiscount;
-			console.log(test.toFixed(2));
-			item.discount = itemDiscount;
 
-			discountSumm+= itemDiscount;
+			var itemPercent = 100 / summ * item.baseSumm;
 
-			if(maxPrice==item.summ) {
+			item.discountPosition = Number( (self.discount / 100 * itemPercent).toFixed(2) );
+			item = itemCalculete(item);
+			
+			discountSumm += item.discountPosition;
+
+			if(maxPrice==item.baseSumm) {
 				itemId = key;
 			}
+			// console.log(item);
 		});
-		var lastDiscountVal = productList[itemId].discountPrice - (self.discount-discountSumm);
-		if(lastDiscountVal > 0) {
-			productList[itemId].discountPrice =  lastDiscountVal;
-			productList[itemId].discount = productList[itemId].summ - productList[itemId].discountPrice
-		} else {
-			productList[itemId].discountPrice = 0;
-			productList[itemId].discount += 1; 
+
+		var checkDiscount = Number( (self.discount-discountSumm).toFixed(2) );
+		console.log(checkDiscount)
+		if(checkDiscount != 0) {
+			productList[itemId] = resultCalculate(productList[itemId],checkDiscount)
 		}
+
+		// var lastDiscountVal = productList[itemId].discountPrice - (self.discount-discountSumm);
+		// if(lastDiscountVal > 0) {
+		// 	productList[itemId].discountPrice =  lastDiscountVal.toFixed(2)-0;
+		// 	productList[itemId].discount = productList[itemId].summ - productList[itemId].discountPrice
+		// } else {
+		// 	productList[itemId].discountPrice = 0;
+		// 	productList[itemId].discount += 1; 
+		// }
 	};
 
 	self.setDiscount = function(val) {
@@ -121,13 +165,11 @@ app.controller('CartHeader', function ($scope,Cart) {
 app.controller('CartContent', function ($scope,Cart) {
 	$scope.productArr = Cart.getProductList();
 	$scope.resultSumm = Cart.getSumm();
-	// $scope.form = {};
-	// $scope.form.discount = Cart.getDiscount();
+	// console.log(Cart.getDiscount())
 
-	Cart.addProduct({name:'Ноубук HP ProBook',price:100.40,count:2});
-	Cart.addProduct({name:'Ноубук HP ProBook',price:100.77,count:1});
-	// Cart.addProduct({name:'Холодильник BOSH',price:234.44,count:1});
-	// Cart.addProduct({name:'Пылесос Philips',price:748.2,count:3});
+	Cart.addProduct({name:'Ноубук 1',basePrice:1000,count:1});
+	Cart.addProduct({name:'Ноубук 2',basePrice:100,count:1});
+	Cart.addProduct({name:'Ноубук 3',basePrice:100,count:3});
 
 	$scope.$watchCollection(Cart.getProductCount, function() {
         Cart.updateProductsDiscount();
@@ -141,6 +183,8 @@ app.controller('CartContent', function ($scope,Cart) {
 });
 
 app.controller('CartFooter', function ($scope,Cart) {
+	$scope.form = {};
+	$scope.form.discount = Cart.getDiscount();
 	$scope.submit = function() {
 		if(!$scope.form) {
 			alert('Поле не заполнено');

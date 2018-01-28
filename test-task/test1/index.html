@@ -45,34 +45,37 @@
 					<table class="table table-bordered">
 						<thead>
 							<tr>
-								<th width="20%">Продукт:</th>
+								<th width="25%">Продукт:</th>
 								<th width="40">Шт.</th>
-								<th width="120">Цена:</th>
-								<th width="120">Сумма</th>
+								<th width="70">Цена Базовая:</th>
+								<th width="80">Сумма</th>
+								<th width="100">Цена с скидкой:</th>
 								<th width="120">Сумма со скидкой:</th>
-								<th width="120">Скидка:</th>
-								<th width="50"></th>
+								<th width="80">Скидка:</th>
+								<th width="40"></th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr ng-repeat="item in productArr">
 								<td>{{item.name}}</td>
 								<td>{{item.count}}</td>
-								<td>{{item.price}} р </td>
-								<td>{{item.summ}} р </td>
-								<td>{{item.discountPrice}} р</td>
-								<td>{{item.discount}} р</td>
+								<td>{{item.basePrice}} р</td>
+								<td>{{item.baseSumm}} р</td>
+								<td><b style="color:green;">{{item.resultPrice}} р</b></td>
+								<td>{{item.discountSumm}} р</td>
+								<td>{{item.discountPosition}} р</td>
 								<td align="right"><a href="javascript:void(0)" class="btn btn-danger btn-xs" ng-click="remove($index)">Удалить</a></td>
 							</tr>
 						</tbody>
 						<tfoot style="border-top:5px solid #ccc; font-weight: bold;">
 							<tr>
 								<td colspan="2"><strong>Общая Сумма</strong></td>
-								<td>{{resultSumm.One}} р</td>
+								<td></td>
 								<td>{{resultSumm.All}} р</td>
+								<td></td>
 								<td>{{resultSumm.DiscountAll}} р</td>
 								<td>{{resultSumm.Discount}} р</td>
-								<td></td>
+								<td>{{resultSumm.result}} р</td>
 							</tr>
 						</tfoot>
 					</table>

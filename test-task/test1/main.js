@@ -154,8 +154,8 @@ app.controller('CartHeader', function ($scope,Cart) {
 		}
 		var item = {
 			name:$scope.form.name ? $scope.form.name : false,
-			price:$scope.form.price ? $scope.form.price : false,
-			count:$scope.form.count ? $scope.form.count : 1,
+			basePrice: $scope.form.price ? $scope.form.price : false,
+			count: $scope.form.count ? $scope.form.count : 1,
 		};
 		Cart.addProduct(item);
 		$scope.form =null;
